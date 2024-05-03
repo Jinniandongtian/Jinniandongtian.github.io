@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>归档: 2024/5 | zyl的博客网站</title>
+  <title>Elasticsearch在项目中的应用 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="关于自己解决问题的过程的思考和小项目">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zyl的博客网站">
-<meta property="og:url" content="http://example.com/archives/2024/05/index.html">
+  <meta name="description" content="docker中拉取镜像并创建容器  将ik配置中文分词器ik  put方法建立索引和映射  使用elasticsearch的bulk包批量导入 1234567 BulkRequest bulkRequest &#x3D; new BulkRequest(&quot;app_info_article&quot;); for(SearchArticleVo searchArticleVo : searchAr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch在项目中的应用">
+<meta property="og:url" content="http://example.com/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="关于自己解决问题的过程的思考和小项目">
+<meta property="og:description" content="docker中拉取镜像并创建容器  将ik配置中文分词器ik  put方法建立索引和映射  使用elasticsearch的bulk包批量导入 1234567 BulkRequest bulkRequest &#x3D; new BulkRequest(&quot;app_info_article&quot;); for(SearchArticleVo searchArticleVo : searchAr">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-03T08:10:48.000Z">
+<meta property="article:modified_time" content="2024-05-03T12:46:51.681Z">
 <meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="校园文明平台项目">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
@@ -69,153 +72,64 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T08:10:48.000Z" itemprop="datePublished">5月 3</time>
+        <section id="main"><article id="post-Elasticsearch在项目中的应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-05-03T08:10:48.000Z" itemprop="datePublished">2024-05-03</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">Elasticsearch在项目中的应用</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Elasticsearch在项目中的应用
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T04:11:28.000Z" itemprop="datePublished">5月 3</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/">自媒体文章上下架</a>
-    </h1>
-  
+        <ul>
+<li><p>docker中拉取镜像并创建容器</p>
+</li>
+<li><p>将ik配置中文分词器ik</p>
+</li>
+<li><p>put方法建立索引和映射</p>
+</li>
+<li><p>使用elasticsearch的bulk包批量导入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">BulkRequest</span> <span class="variable">bulkRequest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BulkRequest</span>(<span class="string">&quot;app_info_article&quot;</span>);</span><br><span class="line"> <span class="keyword">for</span>(SearchArticleVo searchArticleVo : searchArticleVos)&#123;</span><br><span class="line">     <span class="type">IndexRequest</span> <span class="variable">indexRequest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IndexRequest</span>().id(searchArticleVo.getId().toString())</span><br><span class="line">                    .source(JSON.toJSONString(searchArticleVo), XContentType.JSON);</span><br><span class="line"><span class="comment">// 批量添加数据</span></span><br><span class="line">bulkRequest.add(indexRequest);&#125;</span><br><span class="line">restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);</span><br></pre></td></tr></table></figure></li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T03:33:33.000Z" itemprop="datePublished">5月 3</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-02T06:02:29.000Z" itemprop="datePublished">5月 2</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" data-id="clvqo6psx0000c0ue8aly1z3u" data-title="Elasticsearch在项目中的应用" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">ThreadLocal在项目中的应用</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-02T05:31:23.000Z" itemprop="datePublished">5月 2</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/">文章发布流程-5.2</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/01/demoArticle/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-01T12:44:12.821Z" itemprop="datePublished">5月 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/01/demoArticle/">demo文章</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/01/hello-world/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-01T09:20:07.458Z" itemprop="datePublished">5月 1</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/01/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">自媒体文章上下架</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
