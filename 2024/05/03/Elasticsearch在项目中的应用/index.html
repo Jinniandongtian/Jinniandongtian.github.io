@@ -6,15 +6,15 @@
   
   <title>Elasticsearch在项目中的应用 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="docker中拉取镜像并创建容器  将ik配置中文分词器ik  put方法建立索引和映射  使用elasticsearch的bulk包批量导入数据库文章数据 1234567 BulkRequest bulkRequest &#x3D; new BulkRequest(&quot;app_info_article&quot;); for(SearchArticleVo searchArticleVo : s">
+  <meta name="description" content="当文章审核成功时，文章会存储到es中，用户搜索即查询es库，展示文章列表 具体步骤：  docker中拉取镜像并创建容器  将ik配置中文分词器ik  put方法建立索引和映射  使用elasticsearch的bulk包批量导入数据库文章数据 1234567 BulkRequest bulkRequest &#x3D; new BulkRequest(&quot;app_info_article&amp;quot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch在项目中的应用">
 <meta property="og:url" content="http://example.com/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="docker中拉取镜像并创建容器  将ik配置中文分词器ik  put方法建立索引和映射  使用elasticsearch的bulk包批量导入数据库文章数据 1234567 BulkRequest bulkRequest &#x3D; new BulkRequest(&quot;app_info_article&quot;); for(SearchArticleVo searchArticleVo : s">
+<meta property="og:description" content="当文章审核成功时，文章会存储到es中，用户搜索即查询es库，展示文章列表 具体步骤：  docker中拉取镜像并创建容器  将ik配置中文分词器ik  put方法建立索引和映射  使用elasticsearch的bulk包批量导入数据库文章数据 1234567 BulkRequest bulkRequest &#x3D; new BulkRequest(&quot;app_info_article&amp;quot">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-03T08:10:48.000Z">
-<meta property="article:modified_time" content="2024-05-03T13:42:33.057Z">
+<meta property="article:modified_time" content="2024-05-03T13:45:28.146Z">
 <meta property="article:author" content="Jinniandongtian">
 <meta property="article:tag" content="校园文明平台项目">
 <meta name="twitter:card" content="summary">
@@ -94,7 +94,9 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <ul>
+        <p>当文章审核成功时，文章会存储到es中，用户搜索即查询es库，展示文章列表</p>
+<p>具体步骤：</p>
+<ul>
 <li><p>docker中拉取镜像并创建容器</p>
 </li>
 <li><p>将ik配置中文分词器ik</p>
