@@ -6,15 +6,15 @@
   
   <title>自媒体文章上下架 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="总体流程： 根据ID查询文章是否存在，是否发布。 若已发布，则修改自媒体文章的enable字段。至此，自媒体端文章上下架完成。 将articleId和enable传递给Kafka，Kafka通知文章端修改文章配置表。">
+  <meta name="description" content="总体流程： 根据ID查询文章是否存在，是否发布。 若已发布，则修改自媒体文章的enable字段。至此，自媒体端文章上下架完成。 将articleId和enable传递给Kafka，Kafka通知文章端修改文章配置表。  具体实现：生产者： 自媒体微服务使用map封装消息，消息包括articleId和enable两个属性 12map.put(&quot;articleId&quot;,wmNews.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自媒体文章上下架">
 <meta property="og:url" content="http://example.com/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="总体流程： 根据ID查询文章是否存在，是否发布。 若已发布，则修改自媒体文章的enable字段。至此，自媒体端文章上下架完成。 将articleId和enable传递给Kafka，Kafka通知文章端修改文章配置表。">
+<meta property="og:description" content="总体流程： 根据ID查询文章是否存在，是否发布。 若已发布，则修改自媒体文章的enable字段。至此，自媒体端文章上下架完成。 将articleId和enable传递给Kafka，Kafka通知文章端修改文章配置表。  具体实现：生产者： 自媒体微服务使用map封装消息，消息包括articleId和enable两个属性 12map.put(&quot;articleId&quot;,wmNews.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-03T04:11:28.000Z">
-<meta property="article:modified_time" content="2024-05-03T04:16:20.520Z">
+<meta property="article:modified_time" content="2024-05-03T06:16:55.066Z">
 <meta property="article:author" content="Jinniandongtian">
 <meta property="article:tag" content="校园文明平台项目">
 <meta name="twitter:card" content="summary">
@@ -98,6 +98,20 @@
 <li>根据ID查询文章是否存在，是否发布。</li>
 <li>若已发布，则修改自媒体文章的enable字段。至此，自媒体端文章上下架完成。</li>
 <li>将articleId和enable传递给Kafka，Kafka通知文章端修改文章配置表。</li>
+</ul>
+<h2 id="具体实现："><a href="#具体实现：" class="headerlink" title="具体实现："></a>具体实现：</h2><h4 id="生产者："><a href="#生产者：" class="headerlink" title="生产者："></a>生产者：</h4><ul>
+<li><p>自媒体微服务使用map封装消息，消息包括articleId和enable两个属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.put(<span class="string">&quot;articleId&quot;</span>,wmNews.getArticleId());</span><br><span class="line">map.put(<span class="string">&quot;enable&quot;</span>,dto.getEnable());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用Springboot继承的Kafka的<strong>KafkaTemplate</strong>类发送map类型的消息到主题中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafkaTemplate.send(WmNewsMessageConstants.WM_NEWS_UP_OR_DOWN_TOPIC,JSON.toJSONString(map));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="消费者："><a href="#消费者：" class="headerlink" title="消费者："></a>消费者：</h4><ul>
+<li><p>新建一个ArticleIsDownListener类监听，在接收消息的方法上注入**@KafkaListener注解**监听消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@KafkaListener(topics = WmNewsMessageConstants.WM_NEWS_UP_OR_DOWN_TOPIC)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isNotBlank(message))&#123;</span><br><span class="line">            <span class="type">Map</span> <span class="variable">map</span> <span class="operator">=</span> JSON.parseObject(message,Map.class);</span><br><span class="line">            apArticleConfigService.updateByMap(map);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后将监听到的消息更新到<strong>文章配置表</strong>中</p>
+</li>
 </ul>
 
       
