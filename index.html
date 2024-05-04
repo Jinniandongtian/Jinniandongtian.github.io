@@ -71,6 +71,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-延迟任务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T07:57:06.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/">延迟任务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>文章发布时，不管设置的发布时间是当下时间还是未来时间，都要将文章交由<strong>延迟任务微服务</strong>，由它去判断什么时间进行文章审核。</p>
+<p>除了文章发布外，其他操作也可能使用到延迟任务，所以才将延迟任务做成一个单独的微服务。</p>
+<p>使用redis进行任务数据的存储。</p>
+<p>为了在并发的情况下保证数据的准确性，采用数据库锁机制，在项目中集成的是乐观锁。</p>
+<p>在分布式下，为了让其中一个微服务下的一个线程去执行指定方法，我们采用redis实现分布式锁的方案。</p>
+<p>为了提升redis的执行效率，使用redis的管道技术。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/" data-id="clvrtv7e60000gkuegt32ebsm" data-title="延迟任务" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-乐观锁在项目中的应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="article-date">
@@ -549,6 +595,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/">延迟任务</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">乐观锁在项目中的应用</a>
           </li>
         
@@ -562,10 +612,6 @@
         
           <li>
             <a href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/">自媒体文章上下架</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
           </li>
         
       </ul>
