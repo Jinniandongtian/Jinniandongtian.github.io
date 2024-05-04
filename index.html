@@ -71,6 +71,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-热点推荐" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T15:24:56.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="定时计算"><a href="#定时计算" class="headerlink" title="定时计算"></a>定时计算</h2><h3 id="整体思路："><a href="#整体思路：" class="headerlink" title="整体思路："></a>整体思路：</h3><ul>
+<li>查询最近几天发布的所有文章</li>
+<li>基于阅读、点赞、评论、收藏计算分值</li>
+<li>按照分值排序</li>
+<li>将数据缓存到<strong>redis</strong>中，app端用户可以直接查询redis。</li>
+</ul>
+<h3 id="XXL-JOB"><a href="#XXL-JOB" class="headerlink" title="XXL-JOB"></a>XXL-JOB</h3><ul>
+<li><h4 id="为什么使用XXL-JOB？"><a href="#为什么使用XXL-JOB？" class="headerlink" title="为什么使用XXL-JOB？"></a>为什么使用XXL-JOB？</h4><p>Spring传统的定时器@Scheduled存在问题：</p>
+<ul>
+<li>做集群任务的重复执行问题，不同的微服务执行同一个任务会出问题。比如在一个分布式应用内有两个发送优惠券的微服务（一个集群），都去执行发送5000张优惠券的任务时就会出现问题。</li>
+<li>cron代码表达式定义在代码中，修改不方便。</li>
+<li>定时任务失败了，无法重试也没有统计。</li>
+<li>如果任务量过大，不能有效的分片执行。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" data-id="clvs9zg390000ycueh4p17a9i" data-title="热点推荐" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-延迟任务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/" class="article-date">
@@ -502,58 +558,12 @@
 
 
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/01/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-05-01T09:20:07.458Z" itemprop="datePublished">2024-05-01</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/01/hello-world/" data-id="clvnlybem00006kue6bra926h" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -598,6 +608,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/">延迟任务</a>
           </li>
         
@@ -611,10 +625,6 @@
         
           <li>
             <a href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">Elasticsearch在项目中的应用</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/">自媒体文章上下架</a>
           </li>
         
       </ul>
