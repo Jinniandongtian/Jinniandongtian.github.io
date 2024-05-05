@@ -182,7 +182,15 @@
 <li>调用自媒体微服务的频道接口，将每个频道的前30条热门文章存储到redis中。并将所有文章的前30条热门文章缓存到redis中。</li>
 </ul>
 </li>
+<li><h4 id="用XXL-JOB设置定时任务"><a href="#用XXL-JOB设置定时任务" class="headerlink" title="用XXL-JOB设置定时任务"></a>用XXL-JOB设置定时任务</h4><ul>
+<li>xxl-job中设置执行器和任务</li>
+<li>在文章微服务中继承xxl-job并配置。</li>
+<li>建立任务类，使用@XxlJob注解指定方法执行定期任务</li>
 </ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@XxlJob(&quot;computeHotArticleJob&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务开始执行...&quot;</span>);</span><br><span class="line">        hotArticleService.computeHotArticle();</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务结束...&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
