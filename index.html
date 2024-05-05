@@ -71,6 +71,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-navicate无法连接docker上的mysql问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time class="dt-published" datetime="2024-05-05T04:11:03.000Z" itemprop="datePublished">2024-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">navicate无法连接docker上的mysql问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>首先是因为权限问题无法进入docker中的mysql，一直提示拒绝localhost。</p>
+<p>考虑是本地的root权限不足，于是修改本地root权限，修改后如下：</p>
+<p>![](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240505121553616.png)</p>
+<p>root的权限已经变成了%，即所有机器，但还是不行。</p>
+<p>那就移除docker上的mysql容器，重新拉取镜像。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<p>创建sql容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name mysql5.7 -e MYSQL_ROOT_PASSWORD=我的密码 mysql</span><br></pre></td></tr></table></figure>
+
+<p>进入sql容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql5.7 bash</span><br></pre></td></tr></table></figure>
+
+<p>root进入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>输入密码：</p>
+<p>这个时候终于进来了！！这里有个小tips，之前输入密码的时候密码不在屏幕上显示，然后就报错localhost拒绝，我以为是系统问题没把密码输入上，现在才之后屏幕上不显示只是因为安全，拒绝访问是权限问题不是密码问题。</p>
+<p>然后可以修改root密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;新密码&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>授权root远程访问权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;password&#x27; WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候时候权限问题就解决了！</p>
+<p>但是navicate还是连接不上，只是换了个报错代码。思索过后，删掉现有navicate上的连接重新建立连接，成功！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="clvt131s10000zcuehml2a0pi" data-title="navicate无法连接docker上的mysql问题解决" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-热点推荐" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" class="article-date">
@@ -520,44 +586,6 @@
 
 
   
-    <article id="post-demoArticle" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/01/demoArticle/" class="article-date">
-  <time class="dt-published" datetime="2024-05-01T12:44:12.821Z" itemprop="datePublished">2024-05-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/01/demoArticle/">demo文章</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="这是我的示例文章"><a href="#这是我的示例文章" class="headerlink" title="这是我的示例文章"></a>这是我的示例文章</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/01/demoArticle/" data-id="clvnt94h9000010uefebvh9aj" data-title="demo文章" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -576,7 +604,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li></ul>
     </div>
   </div>
 
@@ -586,7 +614,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a>
+      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a>
     </div>
   </div>
 
@@ -608,6 +636,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">navicate无法连接docker上的mysql问题解决</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
           </li>
         
@@ -621,10 +653,6 @@
         
           <li>
             <a href="/2024/05/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Elasticsearch学习记录</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">Elasticsearch在项目中的应用</a>
           </li>
         
       </ul>
