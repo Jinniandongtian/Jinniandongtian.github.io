@@ -191,6 +191,13 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@XxlJob(&quot;computeHotArticleJob&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务开始执行...&quot;</span>);</span><br><span class="line">        hotArticleService.computeHotArticle();</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务结束...&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="实时计算"><a href="#实时计算" class="headerlink" title="实时计算"></a>实时计算</h2><ul>
+<li>用户行为发送给Kafka Stream流式处理，stream进行聚合处理</li>
+<li>数据聚合后重新发送回Kafka，更新数据库</li>
+<li>重新计算文章分值</li>
+<li>查询redis对应数据</li>
+<li>比较分值，如果分值合适就替换推荐和频道中的文章</li>
+</ul>
 
       
     </div>
@@ -487,6 +494,12 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h3 id="Kafka如何保证消息有序性？"><a href="#Kafka如何保证消息有序性？" class="headerlink" title="Kafka如何保证消息有序性？"></a>Kafka如何保证消息有序性？</h3><p>topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。<strong>所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。</strong></p>
+<h1 id="Kafka-stream"><a href="#Kafka-stream" class="headerlink" title="Kafka stream"></a>Kafka stream</h1><ul>
+<li>流式计算与批量计算的区别：电梯和扶梯的区别</li>
+<li>实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控、公交车实时数据</li>
+<li>流式计算技术选型：Hadoop、Apache Storm、Flink、Kafka Stream</li>
+<li>重要的数据结构：KStream，类似于map。KStream数据流就是一段顺序的、可以无限长、不断更新的数据集</li>
+</ul>
 
       
     </div>

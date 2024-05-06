@@ -6,15 +6,15 @@
   
   <title>Kafka学习记录 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Kafka如何保证消息有序性？topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。">
+  <meta name="description" content="Kafka如何保证消息有序性？topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。 Kafka stream 流式计算与批量计算的区别：电梯和扶梯的区别 实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka学习记录">
 <meta property="og:url" content="http://example.com/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="Kafka如何保证消息有序性？topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。">
+<meta property="og:description" content="Kafka如何保证消息有序性？topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。 Kafka stream 流式计算与批量计算的区别：电梯和扶梯的区别 实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-03T03:33:33.000Z">
-<meta property="article:modified_time" content="2024-05-03T03:37:38.067Z">
+<meta property="article:modified_time" content="2024-05-06T05:51:46.338Z">
 <meta property="article:author" content="Jinniandongtian">
 <meta property="article:tag" content="框架学习">
 <meta name="twitter:card" content="summary">
@@ -95,6 +95,12 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h3 id="Kafka如何保证消息有序性？"><a href="#Kafka如何保证消息有序性？" class="headerlink" title="Kafka如何保证消息有序性？"></a>Kafka如何保证消息有序性？</h3><p>topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。<strong>所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。</strong></p>
+<h1 id="Kafka-stream"><a href="#Kafka-stream" class="headerlink" title="Kafka stream"></a>Kafka stream</h1><ul>
+<li>流式计算与批量计算的区别：电梯和扶梯的区别</li>
+<li>实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控、公交车实时数据</li>
+<li>流式计算技术选型：Hadoop、Apache Storm、Flink、Kafka Stream</li>
+<li>重要的数据结构：KStream，类似于map。KStream数据流就是一段顺序的、可以无限长、不断更新的数据集</li>
+</ul>
 
       
     </div>
