@@ -71,6 +71,125 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-5-7面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-07T02:32:27.000Z" itemprop="datePublished">2024-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5.7面试内容准备</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Spring的生命周期</p>
+<ul>
+<li>将xml配置文件里的bean的配置信息封装成一个BeanDefiniton对象，Spring容器根据BeanDefiniton获取Bean的定义信息</li>
+<li>调用构造函数实例化bean</li>
+<li>bean的依赖注入</li>
+<li>处理Aware接口</li>
+<li>Bean的前置的后置处理器</li>
+<li>初始化方法(InitializingBean、自定义方法)</li>
+<li>Bean的后置的后置处理器</li>
+<li>销毁Bean</li>
+</ul>
+<p>SpringMVC的执行流程(两个版本</p>
+<p>Spring的常见注解有哪些？</p>
+<ul>
+<li>Spring的常见注解<ul>
+<li>声明为Bean：@Component、@Controller、@Service、@Repository</li>
+<li>@Autowired、@Qualifier</li>
+<li>@Bean:用在方法上，将返回结果放入Spring容器</li>
+</ul>
+</li>
+<li>SpringMVC的常见注解：<ul>
+<li>请求：@RequestMapping、@RequestParam、@RequestBody</li>
+<li>响应：@ResponseBody</li>
+<li>其他：@PathVirable、@ResController</li>
+</ul>
+</li>
+<li>SpringBooy的常见注解：<ul>
+<li>@SpringBootConfiguration</li>
+<li>@EnableAutoConfiguration</li>
+<li>@ComponentScan</li>
+</ul>
+</li>
+</ul>
+<p>Spring Cloud的五大组件？</p>
+<ul>
+<li>网关、注册中心、远程调用、负载均衡、服务熔断</li>
+</ul>
+<p>Nacos的作用</p>
+<ul>
+<li>服务注册、服务发现、服务监控</li>
+</ul>
+<p>Kafka如何保证消息不丢失？</p>
+<ul>
+<li>生产者发送消息到Brocker丢失<ul>
+<li>设置失败重试</li>
+<li>设置异步发送，使用回调函数，发送失败重发</li>
+</ul>
+</li>
+<li>存储丢失：<ul>
+<li>设置ack&#x3D;1</li>
+</ul>
+</li>
+<li>消费者<ul>
+<li>手动提交偏移量</li>
+</ul>
+</li>
+</ul>
+<p>Kafka如何保证消息的顺序性</p>
+<ul>
+<li>发送消息时指定分区号</li>
+</ul>
+<p>Kafka集群</p>
+<ul>
+<li>一个Kafka集群由多个broker实例组成，即使某一台宕机，也不耽误其他broker继续对外提供服务</li>
+</ul>
+<p>讲一讲HashMap的扩容机制？</p>
+<p>谈谈你对ThreadLocal的理解？</p>
+<ul>
+<li>ThreadLocalke’yi</li>
+</ul>
+<h1 id="Java并发"><a href="#Java并发" class="headerlink" title="Java并发"></a>Java并发</h1><h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><h5 id="volatile关键字的原子性问题的产生根源"><a href="#volatile关键字的原子性问题的产生根源" class="headerlink" title="volatile关键字的原子性问题的产生根源"></a>volatile关键字的原子性问题的产生根源</h5><ul>
+<li>首先变量增减不是原子性操作，count+&#x3D;5看似是一条指令，实际上编译成字节码是多行代码（非原子操作）</li>
+<li>当两个线程的指令发生错位时，就会导致线程安全问题。</li>
+<li>举例：1、线程A获取变量值为10 。 2、线程B获取变量值为10。3、线程B变量10+5&#x3D;15赋给变量。4、线程A执行10-5&#x3D;5赋给变量。所以变量10在两个线程-5和+5的操作下变成了5</li>
+</ul>
+<h5 id="可见性问题出现的原因以及解决方法"><a href="#可见性问题出现的原因以及解决方法" class="headerlink" title="可见性问题出现的原因以及解决方法"></a>可见性问题出现的原因以及解决方法</h5><ul>
+<li>原因：当一个线程中的一段代码运行次数过多(大概一千万次)时，JIT(Java实时编译器)会进行优化，将代码直接改成已经很多次从内存中读出的结果。因此当别的线程改了主存中的变量值时，此线程获取不到，就会出现可见性问题。</li>
+<li>解决方法：用volatile关键字修饰，即使代码已经执行了很多次，JIT也不改变变量的值，而是一直让线程去内存获取值，这样内存中的值被其他线程改变时该线程也能及时获取到。（volatile：<strong>摆烂许可证</strong>）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clvwh33qq0000j8ue10wx8tcz" data-title="5.7面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-navicate无法连接docker上的mysql问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
@@ -565,56 +684,6 @@
 
 
   
-    <article id="post-文章发布流程-5-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/" class="article-date">
-  <time class="dt-published" datetime="2024-05-02T05:31:23.000Z" itemprop="datePublished">2024-05-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/">文章发布流程-5.2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>文章发布使用一个submitNews(WmNewDto dto)函数实现的。<strong>特别注意的是，文章发布操作必须关联素材，并将文章与素材的关系保存到数据库中。</strong></p>
-<p>具体步骤如下：</p>
-<ul>
-<li><p>首先判断dto中是否存在文章id，若有则是修改文章，否则是新增文章。</p>
-</li>
-<li><p>对于修改文章操作，文章修改要先删除已关联的素材关系。</p>
-</li>
-<li><p>当新增或者修改完毕后，判断是否要保存为草稿，若不保存为草稿，则要关联文章内容图片和封面图片与素材的关系，这通过一个saveRelations函数实现。</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/" data-id="clvou46yy000084uebltd7f9k" data-title="文章发布流程-5.2" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -633,7 +702,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li></ul>
     </div>
   </div>
 
@@ -643,7 +712,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a>
+      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a>
     </div>
   </div>
 
@@ -665,6 +734,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5.7面试内容准备</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">navicate无法连接docker上的mysql问题解决</a>
           </li>
         
@@ -678,10 +751,6 @@
         
           <li>
             <a href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">乐观锁在项目中的应用</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Elasticsearch学习记录</a>
           </li>
         
       </ul>
