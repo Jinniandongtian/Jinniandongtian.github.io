@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java语法 | zyl的博客网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="变量byte一个字节占8位，因为是有符号数，所以最大数为01111111，7位1，最大值2e6，最大和就是2e7。 常量隐式类型转换： 12int t &#x3D; &#x27;A&#x27; + 2;System.out.println(t); &#x2F;&#x2F; t &#x3D; 67  原则：向更高类型转换（char –&gt; int） 12double z &#x3D; 4 * 3.3;System.out.println(z);">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语法">
+<meta property="og:url" content="http://example.com/2024/05/08/Java%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="zyl的博客网站">
+<meta property="og:description" content="变量byte一个字节占8位，因为是有符号数，所以最大数为01111111，7位1，最大值2e6，最大和就是2e7。 常量隐式类型转换： 12int t &#x3D; &#x27;A&#x27; + 2;System.out.println(t); &#x2F;&#x2F; t &#x3D; 67  原则：向更高类型转换（char –&gt; int） 12double z &#x3D; 4 * 3.3;System.out.println(z);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-08T06:28:39.000Z">
+<meta property="article:modified_time" content="2024-05-08T10:25:50.056Z">
+<meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">zyl的博客网站</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2024-05-08T06:28:39.000Z" itemprop="datePublished">2024-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java语法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>byte一个字节占8位，因为是有符号数，所以最大数为01111111，7位1，最大值2e6，最大和就是2e7。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>隐式类型转换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span> + <span class="number">2</span>;</span><br><span class="line">System.out.println(t); <span class="comment">// t = 67</span></span><br></pre></td></tr></table></figure>
+
+<p>原则：向更高类型转换（char –&gt; int）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">z</span> <span class="operator">=</span> <span class="number">4</span> * <span class="number">3.3</span>;</span><br><span class="line">System.out.println(z); <span class="comment">// z = 13.2</span></span><br></pre></td></tr></table></figure>
+
+<p>先将4转换为double再相乘</p>
+<p>Java取整机制：<strong>向零取整</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(-<span class="number">3</span>/<span class="number">2</span>); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
+<p>有效数字：double的有效数字为16位，float位7位（都是整数位+小数位），有效位数之内的数一定是正确的</p>
+<p>判断两个浮点数是否相等：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>,y=<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">if</span>(Math.abs(x-y) &lt; <span class="number">1e-6</span>)&#123;</span><br><span class="line">         System.out.println(<span class="string">&quot;x=y&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="读入与输出"><a href="#读入与输出" class="headerlink" title="读入与输出"></a>读入与输出</h2><h3 id="读入"><a href="#读入" class="headerlink" title="读入"></a>读入</h3><h4 id="用Scanner对象"><a href="#用Scanner对象" class="headerlink" title="用Scanner对象"></a>用Scanner对象</h4><p>Java读入字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">         <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">         <span class="comment">// 读入字符串</span></span><br><span class="line">         <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">         System.out.println(str);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读入整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.nextInt();</span><br></pre></td></tr></table></figure>
+
+<h4 id="用BufferReader和InputStreamReader对象"><a href="#用BufferReader和InputStreamReader对象" class="headerlink" title="用BufferReader和InputStreamReader对象"></a>用BufferReader和InputStreamReader对象</h4><p>读字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">       <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">       <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> br.readLine();</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span>  <span class="operator">=</span> Integer.parseInt(br.readLine());</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span>  <span class="operator">=</span> Integer.parseInt(br.readLine());</span><br><span class="line">System.out.println(x + y);</span><br></pre></td></tr></table></figure>
+
+<p>在一行读整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">String str[] = br.readLine().split(<span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span>  <span class="operator">=</span> Integer.parseInt(str[<span class="number">0</span>]);</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span>  <span class="operator">=</span> Integer.parseInt(str[<span class="number">1</span>]);</span><br><span class="line"> System.out.println(x + y);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>输出：除了println还有printf函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d %.2f\n&quot;</span>,<span class="number">4</span>,<span class="number">123.456</span>); <span class="comment">//不足4位前面补0</span></span><br></pre></td></tr></table></figure>
+
+<p>尤其用在输出日期   （%2d不加0就是空格补齐）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d-%2d-%02d&quot;</span>,<span class="number">2024</span>,<span class="number">5</span>,<span class="number">8</span>); <span class="comment">//2024- 5-08 </span></span><br></pre></td></tr></table></figure>
+
+<p>%-4d从后面补齐</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d-%-2d-%02d&quot;</span>,<span class="number">2024</span>,<span class="number">5</span>,<span class="number">8</span>); <span class="comment">//2024-5 -08 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="BufferWriter对象"><a href="#BufferWriter对象" class="headerlink" title="BufferWriter对象"></a>BufferWriter对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">      <span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(System.out));</span><br><span class="line">      bw.write(<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">      bw.flush();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Java数组"><a href="#Java数组" class="headerlink" title="Java数组"></a>Java数组</h3><p>数组初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a; <span class="comment">//a未被初始化，长度为0，数组为空</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];  <span class="comment">//仅初始化长度，数组元素为0</span></span><br><span class="line">System.out.printf(<span class="string">&quot;%d %d %d&quot;</span>,b[<span class="number">0</span>],b[<span class="number">1</span>],b[<span class="number">2</span>]); <span class="comment">// 0 0 0 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>&#125;; <span class="comment">//初始化的另一种方式</span></span><br><span class="line">System.out.printf(<span class="string">&quot;%d %d %d&quot;</span>,a[<span class="number">0</span>],a[<span class="number">1</span>],a[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>数组排序API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(a); <span class="comment">//排序</span></span><br></pre></td></tr></table></figure>
+
+<p>数组长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.length;</span><br></pre></td></tr></table></figure>
+
+<p>输出数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString(q) <span class="comment">//[1, 2, 3, 4, 9]的形式</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/08/Java%E8%AF%AD%E6%B3%95/" data-id="clvxocq9s00010wue8pzbdwvl" data-title="Java语法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">C++语法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/">Java语法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/">C++语法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5.7面试内容准备</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">navicate无法连接docker上的mysql问题解决</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jinniandongtian<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -71,6 +71,155 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2024-05-08T06:28:39.000Z" itemprop="datePublished">2024-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/">Java语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>byte一个字节占8位，因为是有符号数，所以最大数为01111111，7位1，最大值2e6，最大和就是2e7。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>隐式类型转换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span> + <span class="number">2</span>;</span><br><span class="line">System.out.println(t); <span class="comment">// t = 67</span></span><br></pre></td></tr></table></figure>
+
+<p>原则：向更高类型转换（char –&gt; int）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">z</span> <span class="operator">=</span> <span class="number">4</span> * <span class="number">3.3</span>;</span><br><span class="line">System.out.println(z); <span class="comment">// z = 13.2</span></span><br></pre></td></tr></table></figure>
+
+<p>先将4转换为double再相乘</p>
+<p>Java取整机制：<strong>向零取整</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(-<span class="number">3</span>/<span class="number">2</span>); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
+<p>有效数字：double的有效数字为16位，float位7位（都是整数位+小数位），有效位数之内的数一定是正确的</p>
+<p>判断两个浮点数是否相等：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>,y=<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">if</span>(Math.abs(x-y) &lt; <span class="number">1e-6</span>)&#123;</span><br><span class="line">         System.out.println(<span class="string">&quot;x=y&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="读入与输出"><a href="#读入与输出" class="headerlink" title="读入与输出"></a>读入与输出</h2><h3 id="读入"><a href="#读入" class="headerlink" title="读入"></a>读入</h3><h4 id="用Scanner对象"><a href="#用Scanner对象" class="headerlink" title="用Scanner对象"></a>用Scanner对象</h4><p>Java读入字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">         <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">         <span class="comment">// 读入字符串</span></span><br><span class="line">         <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">         System.out.println(str);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读入整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.nextInt();</span><br></pre></td></tr></table></figure>
+
+<h4 id="用BufferReader和InputStreamReader对象"><a href="#用BufferReader和InputStreamReader对象" class="headerlink" title="用BufferReader和InputStreamReader对象"></a>用BufferReader和InputStreamReader对象</h4><p>读字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">       <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">       <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> br.readLine();</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span>  <span class="operator">=</span> Integer.parseInt(br.readLine());</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span>  <span class="operator">=</span> Integer.parseInt(br.readLine());</span><br><span class="line">System.out.println(x + y);</span><br></pre></td></tr></table></figure>
+
+<p>在一行读整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">String str[] = br.readLine().split(<span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span>  <span class="operator">=</span> Integer.parseInt(str[<span class="number">0</span>]);</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span>  <span class="operator">=</span> Integer.parseInt(str[<span class="number">1</span>]);</span><br><span class="line"> System.out.println(x + y);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>输出：除了println还有printf函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d %.2f\n&quot;</span>,<span class="number">4</span>,<span class="number">123.456</span>); <span class="comment">//不足4位前面补0</span></span><br></pre></td></tr></table></figure>
+
+<p>尤其用在输出日期   （%2d不加0就是空格补齐）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d-%2d-%02d&quot;</span>,<span class="number">2024</span>,<span class="number">5</span>,<span class="number">8</span>); <span class="comment">//2024- 5-08 </span></span><br></pre></td></tr></table></figure>
+
+<p>%-4d从后面补齐</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d-%-2d-%02d&quot;</span>,<span class="number">2024</span>,<span class="number">5</span>,<span class="number">8</span>); <span class="comment">//2024-5 -08 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="BufferWriter对象"><a href="#BufferWriter对象" class="headerlink" title="BufferWriter对象"></a>BufferWriter对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">      <span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(System.out));</span><br><span class="line">      bw.write(<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">      bw.flush();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Java数组"><a href="#Java数组" class="headerlink" title="Java数组"></a>Java数组</h3><p>数组初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a; <span class="comment">//a未被初始化，长度为0，数组为空</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];  <span class="comment">//仅初始化长度，数组元素为0</span></span><br><span class="line">System.out.printf(<span class="string">&quot;%d %d %d&quot;</span>,b[<span class="number">0</span>],b[<span class="number">1</span>],b[<span class="number">2</span>]); <span class="comment">// 0 0 0 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>&#125;; <span class="comment">//初始化的另一种方式</span></span><br><span class="line">System.out.printf(<span class="string">&quot;%d %d %d&quot;</span>,a[<span class="number">0</span>],a[<span class="number">1</span>],a[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>数组排序API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(a); <span class="comment">//排序</span></span><br></pre></td></tr></table></figure>
+
+<p>数组长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.length;</span><br></pre></td></tr></table></figure>
+
+<p>输出数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString(q) <span class="comment">//[1, 2, 3, 4, 9]的形式</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/08/Java%E8%AF%AD%E6%B3%95/" data-id="clvxocq9s00010wue8pzbdwvl" data-title="Java语法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-C-语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2024-05-08T04:45:47.000Z" itemprop="datePublished">2024-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/">C++语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>读入字符数组char s[100]</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s); cin&gt;&gt;s  <span class="comment">//从下标0开始</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>); cin&gt;&gt;s+<span class="number">1</span>  <span class="comment">//从下标1开始</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,&amp;s[<span class="number">1</span>]) cin&gt;&gt;s[<span class="number">1</span>]<span class="comment">//读入s[1]</span></span><br></pre></td></tr></table></figure>
+
+<p>以上都是读到空格或回车结束，下面是不结束的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fgets</span>(s,<span class="number">10000</span>,stdin);</span><br><span class="line">cin.<span class="built_in">getline</span>(s,<span class="number">100</span>); </span><br></pre></td></tr></table></figure>
+
+<p>输出字符数组，两者等价</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">puts</span>(s);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,s)</span><br></pre></td></tr></table></figure>
+
+<p>读入字符串string</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getline</span>(cin,s);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/08/C-%E8%AF%AD%E6%B3%95/" data-id="clvxocq9p00000wue9y3lct2y" data-title="C++语法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-5-7面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
@@ -169,8 +318,8 @@
 <li>举例：1、线程A获取变量值为10 。 2、线程B获取变量值为10。3、线程B变量10+5&#x3D;15赋给变量。4、线程A执行10-5&#x3D;5赋给变量。所以变量10在两个线程-5和+5的操作下变成了5</li>
 </ul>
 <h5 id="可见性问题出现的原因以及解决方法"><a href="#可见性问题出现的原因以及解决方法" class="headerlink" title="可见性问题出现的原因以及解决方法"></a>可见性问题出现的原因以及解决方法</h5><ul>
-<li>原因：当一个线程中的一段代码运行次数过多(大概一千万次)时，JIT(Java实时编译器)会进行优化，将代码直接改成已经很多次从内存中读出的结果。因此当别的线程改了主存中的变量值时，此线程获取不到，就会出现可见性问题。</li>
-<li>解决方法：用volatile关键字修饰，即使代码已经执行了很多次，JIT也不改变变量的值，而是一直让线程去内存获取值，这样内存中的值被其他线程改变时该线程也能及时获取到。（volatile：<strong>摆烂许可证</strong>）</li>
+<li>原因：当一个线程中的一段代码运行次数过多(大概一千万次)时，JIT(Java实时编译器)会进行优化，将代码直接改成已经很多次从内存中读出的结果。因此当别的线程改了主存中的变量值时，此线程获取不到，就会出现可见性问题（<strong>JIT好心办坏事</strong>）。</li>
+<li>解决方法：用volatile关键字修饰，即使代码已经执行了很多次，JIT也不改变变量的值，而是一直让线程去内存获取值，这样内存中的值被其他线程改变时该线程也能及时获取到。（<strong>volatile：****摆烂许可证</strong>）</li>
 </ul>
 
       
@@ -590,100 +739,6 @@
 
 
   
-    <article id="post-Kafka学习记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
-  <time class="dt-published" datetime="2024-05-03T03:33:33.000Z" itemprop="datePublished">2024-05-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="Kafka如何保证消息有序性？"><a href="#Kafka如何保证消息有序性？" class="headerlink" title="Kafka如何保证消息有序性？"></a>Kafka如何保证消息有序性？</h3><p>topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。<strong>所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。</strong></p>
-<h1 id="Kafka-stream"><a href="#Kafka-stream" class="headerlink" title="Kafka stream"></a>Kafka stream</h1><ul>
-<li>流式计算与批量计算的区别：电梯和扶梯的区别</li>
-<li>实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控、公交车实时数据</li>
-<li>流式计算技术选型：Hadoop、Apache Storm、Flink、Kafka Stream</li>
-<li>重要的数据结构：KStream，类似于map。KStream数据流就是一段顺序的、可以无限长、不断更新的数据集</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-id="clvq4jufo00006ouefvn8dgac" data-title="Kafka学习记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-ThreadLocal在项目中的应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2024-05-02T06:02:29.000Z" itemprop="datePublished">2024-05-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">ThreadLocal在项目中的应用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="在哪里用的ThreadLocal？"><a href="#在哪里用的ThreadLocal？" class="headerlink" title="在哪里用的ThreadLocal？"></a>在哪里用的ThreadLocal？</h2><p>用ThreadLocal保存登录用户的信息。</p>
-<h2 id="为什么要用ThreadLocal？"><a href="#为什么要用ThreadLocal？" class="headerlink" title="为什么要用ThreadLocal？"></a>为什么要用ThreadLocal？</h2><p>方便随时随地获取用户的信息。</p>
-<h2 id="如何用ThreadLocal保存用户信息？"><a href="#如何用ThreadLocal保存用户信息？" class="headerlink" title="如何用ThreadLocal保存用户信息？"></a>如何用ThreadLocal保存用户信息？</h2><ul>
-<li>1、在网关中解析token获取userId,并存入header</li>
-<li>2、在自媒体拦截器中获取userId，用ThreadLocal工具将wmUser自媒体对象存入本地线程</li>
-<li>3、写一个拦截器配置类使拦截器生效</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" data-id="clvoujozg0000ogueb3xygz0e" data-title="ThreadLocal在项目中的应用" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -702,7 +757,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li></ul>
     </div>
   </div>
 
@@ -712,7 +767,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a>
+      <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a>
     </div>
   </div>
 
@@ -734,6 +789,14 @@
       <ul>
         
           <li>
+            <a href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/">Java语法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/">C++语法</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5.7面试内容准备</a>
           </li>
         
@@ -743,14 +806,6 @@
         
           <li>
             <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/">延迟任务</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">乐观锁在项目中的应用</a>
           </li>
         
       </ul>
