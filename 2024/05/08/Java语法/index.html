@@ -14,7 +14,7 @@
 <meta property="og:description" content="变量byte一个字节占8位，因为是有符号数，所以最大数为01111111，7位1，最大值2e6，最大和就是2e7。 常量隐式类型转换： 12int t &#x3D; &#x27;A&#x27; + 2;System.out.println(t); &#x2F;&#x2F; t &#x3D; 67  原则：向更高类型转换（char –&gt; int） 12double z &#x3D; 4 * 3.3;System.out.println(z);">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-08T06:28:39.000Z">
-<meta property="article:modified_time" content="2024-05-08T15:33:24.324Z">
+<meta property="article:modified_time" content="2024-05-09T08:44:44.739Z">
 <meta property="article:author" content="Jinniandongtian">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -238,6 +238,132 @@
 <p>哪怕是用包装的基本类型也没用，因为传递过去只是交换了形参的地址指向，实参的地址没有被改变</p>
 <h4 id="函数的重载："><a href="#函数的重载：" class="headerlink" title="函数的重载："></a>函数的重载：</h4><p>在同一个类中，函数的名称相同，参数列表和返回值不同。</p>
 <p>当调用同名函数时，会根据参数类型找到最合适的函数</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>如果成员变量不加修饰符，只能在同一个包内可以访问</p>
+<p>静态成员变量可以认为是一个公有的变量（公有财产）</p>
+<p>Java子类必须有构造函数，且子类构造函数必须调用其父类的构造函数</p>
+<p>多态的体现：子类调用与父类同名的函数，但是优先使用子类的函数。</p>
+<p>多态的好处：<strong>可以让各个子类对象调用一个方法实现各自的功能</strong>。比如：LOL中每个英雄上来会说一句话，如果没有多态。要写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(第一个英雄) h1.greet()</span><br><span class="line">else if(第二个英雄) h2.great();</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<p>如果使用多态，只需共同继承一个父类，然后重写对应的greet()方法就可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hero hreo;</span><br><span class="line">h1.greet();</span><br><span class="line">h2.great();</span><br></pre></td></tr></table></figure>
+
+<h4 id="接口的多态"><a href="#接口的多态" class="headerlink" title="接口的多态"></a>接口的多态</h4><p>定义一个英雄接口数组，两个元素，一个是宙斯，另一个是雅典娜。</p>
+<p>遍历数组调用greet()函数，那么每个英雄会会调用各自的函数实现。</p>
+<h2 id="Java容器"><a href="#Java容器" class="headerlink" title="Java容器"></a>Java容器</h2><h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>添加元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.add(<span class="number">20</span>);</span><br><span class="line">System.out.println(list); <span class="comment">//[1, 2, 20]</span></span><br></pre></td></tr></table></figure>
+
+<p>清空元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.clear();</span><br></pre></td></tr></table></figure>
+
+<p>返回长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.size();</span><br></pre></td></tr></table></figure>
+
+<p>判断是否为空</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.isEmpty();</span><br></pre></td></tr></table></figure>
+
+<p>访问某个元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.get(i);</span><br></pre></td></tr></table></figure>
+
+<p>改变某个元素的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.set(i,list.get(i)+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="stack-栈是一个类"><a href="#stack-栈是一个类" class="headerlink" title="stack (栈是一个类)"></a>stack (栈是一个类)</h4><p>定义一个栈</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;Integer&gt; stk = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>压入栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.push(1);</span><br></pre></td></tr></table></figure>
+
+<p>弹出栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.pop();</span><br></pre></td></tr></table></figure>
+
+<p>输出栈顶元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.peek();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;Integer&gt; stk = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">stk.push(<span class="number">1</span>);</span><br><span class="line">stk.push(<span class="number">2</span>);</span><br><span class="line">stk.push(<span class="number">10</span>);</span><br><span class="line">System.out.println(stk.pop()); <span class="comment">//10</span></span><br><span class="line">System.out.println(stk.peek()); <span class="comment">//2</span></span><br><span class="line">System.out.println(stk); <span class="comment">//[1,2]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Queue（队列是一个接口）"><a href="#Queue（队列是一个接口）" class="headerlink" title="Queue（队列是一个接口）"></a>Queue（队列是一个接口）</h4><p>用LinkedList定义一个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; q = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;(); <span class="comment">//linkedList实现了deque接口</span></span><br></pre></td></tr></table></figure>
+
+<p>添加元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.add(1);</span><br></pre></td></tr></table></figure>
+
+<p>删除队头元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">q.add(<span class="number">1</span>);</span><br><span class="line">q.add(<span class="number">2</span>);</span><br><span class="line">q.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(q.remove()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>返回队头元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(q.peek());</span><br></pre></td></tr></table></figure>
+
+<p>优先队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;();</span><br><span class="line">q.add(<span class="number">2</span>);</span><br><span class="line">q.add(<span class="number">1</span>);</span><br><span class="line">q.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(q); <span class="comment">//[1,2,10]</span></span><br></pre></td></tr></table></figure>
+
+<p>优先队列是用小根堆来实现的（堆排序）</p>
+<p>堆排序的步骤：先建堆，再破坏堆，拿出堆顶元素。</p>
+<p>定义大根堆的优先队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(Collections.reverseOrder());</span><br><span class="line">q.add(<span class="number">2</span>);</span><br><span class="line">q.add(<span class="number">1</span>);</span><br><span class="line">q.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(q); <span class="comment">//[10, 1, 2]</span></span><br></pre></td></tr></table></figure>
+
+<p>倒序输出优先队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(q.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">      System.out.println(q.remove()); <span class="comment">//10 2 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><h5 id="HashSet（无序）"><a href="#HashSet（无序）" class="headerlink" title="HashSet（无序）"></a>HashSet（无序）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>判断某个数是否存在</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set.add(<span class="number">1</span>);</span><br><span class="line">set.add(<span class="number">2</span>);</span><br><span class="line">set.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(set.contains(<span class="number">5</span>)); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>删除某个元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.remove();</span><br></pre></td></tr></table></figure>
+
+<p>遍历一个set</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set.add(<span class="number">45</span>);</span><br><span class="line">set.add(<span class="number">296</span>);</span><br><span class="line">set.add(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> x : set)&#123;</span><br><span class="line">      System.out.println(x);</span><br><span class="line">&#125; <span class="comment">// 296 10 45</span></span><br></pre></td></tr></table></figure>
+
+<p>可见HashSet是无序的</p>
+<h5 id="TreeSet（有序）基于红黑树实现"><a href="#TreeSet（有序）基于红黑树实现" class="headerlink" title="TreeSet（有序）基于红黑树实现"></a>TreeSet（有序）基于红黑树实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;();</span><br><span class="line">set.add(<span class="number">45</span>);</span><br><span class="line">set.add(<span class="number">296</span>);</span><br><span class="line">set.add(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> x : set)&#123;</span><br><span class="line">     System.out.println(x);</span><br><span class="line">&#125; <span class="comment">//10 45 296</span></span><br></pre></td></tr></table></figure>
+
+<p>返回&gt;&#x3D;某个数的最小值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.ceiling(<span class="number">45</span>)</span><br></pre></td></tr></table></figure>
+
+<p>返回&lt;&#x3D;某个数的最大值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.floor(<span class="number">40</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><h5 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;123&quot;</span>,<span class="number">2</span>);</span><br><span class="line">map.put(<span class="string">&quot;321&quot;</span>,<span class="number">3</span>);</span><br><span class="line">map.put(<span class="string">&quot;21&quot;</span>,<span class="number">10</span>);</span><br><span class="line">System.out.println(map.get(<span class="string">&quot;123&quot;</span>)); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(map.get(<span class="string">&quot;1233&quot;</span>)); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>判断某个键是否存在</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(map.containsKey(<span class="string">&quot;123&quot;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>删除某个键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.remove(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(map.containsKey(<span class="string">&quot;123&quot;</span>)); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>获取HashMap中的元素数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.size();</span><br></pre></td></tr></table></figure>
+
+<p>**!**遍历HashMap中的元素（用Map.Entry&lt;K,V&gt;）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;123&quot;</span>,<span class="number">2</span>);</span><br><span class="line">map.put(<span class="string">&quot;321&quot;</span>,<span class="number">3</span>);</span><br><span class="line">map.put(<span class="string">&quot;21&quot;</span>,<span class="number">10</span>);</span><br><span class="line"><span class="keyword">for</span>(Map.Entry&lt;String,Integer&gt; entry : map.entrySet())&#123;</span><br><span class="line">      System.out.printf(<span class="string">&quot;%s %d\n&quot;</span>,entry.getKey(),entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 123 2</span></span><br><span class="line"><span class="comment">// 321 3</span></span><br><span class="line"><span class="comment">// 21 10</span></span><br></pre></td></tr></table></figure>
+
+<p>返回&gt;&#x3D;某个键值的最小的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TreeMap&lt;Integer,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="number">123</span>,<span class="number">2</span>);</span><br><span class="line">map.put(<span class="number">321</span>,<span class="number">3</span>);</span><br><span class="line">map.put(<span class="number">21</span>,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">Map.Entry&lt;Integer,Integer&gt; up = map.ceilingEntry(<span class="number">123</span>);</span><br><span class="line">System.out.println(up); <span class="comment">//123=2</span></span><br></pre></td></tr></table></figure>
+
+<p>返回&gt;&#x3D;某个键值的最大的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map.Entry&lt;Integer,Integer&gt; up = map.floorEntry(<span class="number">122</span>);</span><br><span class="line">System.out.println(up); <span class="comment">//21=10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>运行时异常：</p>
+<p>非运行型异常，即检查型异常：</p>
+<p>​	两种处理方式：抛出异常或者捕获异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">()</span>&#123;</span><br><span class="line">       <span class="type">int</span>[] array = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">           array[i] = i ;</span><br><span class="line">       <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">       <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">       <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           array[k] /= x;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (ArithmeticException e)&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;除以零啦！&quot;</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (ArrayIndexOutOfBoundsException e)&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;数组越界啦！&quot;</span>);</span><br><span class="line">       &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">               System.out.printf(<span class="string">&quot;array[%d] = %d\n&quot;</span>,i,array[i]);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(<span class="string">&quot;程序执行完啦！&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>即使catch中有return语句，finally中的语句依然会执行</p>
+<p>异常信息API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.getMessage();</span><br></pre></td></tr></table></figure>
+
+<p>异常路径API</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.printStackTrace();</span><br></pre></td></tr></table></figure>
+
+<p>调用处理异常方法与不调用的区别是：调用方法后程序不会终止</p>
+<h5 id="抛异常"><a href="#抛异常" class="headerlink" title="抛异常"></a>抛异常</h5><p>throw：在函数内部调用</p>
+<p>throws:在函数外部抛出一些可能会出现的异常</p>
+<h5 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String line;</span><br><span class="line"><span class="keyword">try</span>(</span><br><span class="line">          <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;input.txt&quot;</span>));</span><br><span class="line">          <span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;src/output.txt&quot;</span>));</span><br><span class="line">       )&#123;</span><br><span class="line">           <span class="keyword">while</span> ((line = br.readLine()) != <span class="literal">null</span>)&#123;</span><br><span class="line">               System.out.println(<span class="string">&quot;Line =&gt; &quot;</span> + line);</span><br><span class="line">               bw.write(<span class="string">&quot;Copy: &quot;</span> + line + <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">         &#125;</span><br><span class="line">           bw.flush();</span><br><span class="line">   &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">           System.out.println(e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
