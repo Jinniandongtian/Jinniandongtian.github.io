@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>5-10面试内容准备 | zyl的博客网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="AQS 多线程中的抽象队列同步器，是一种锁机制，作为一种基础框架使用的，例如ReentrantLock、Semaphored、countdownlatch都是基于AQS实现的。 AQS内部维护了一个先进先出的双向队列，队列中存储的是排队的线程 AQS内部还有一个属性state，默认为0。当队列中的一个线程修改state为1，则默认当前线程获取了锁 为保证对state修改的原子性，使用的是CAS操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5-10面试内容准备">
+<meta property="og:url" content="http://example.com/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/index.html">
+<meta property="og:site_name" content="zyl的博客网站">
+<meta property="og:description" content="AQS 多线程中的抽象队列同步器，是一种锁机制，作为一种基础框架使用的，例如ReentrantLock、Semaphored、countdownlatch都是基于AQS实现的。 AQS内部维护了一个先进先出的双向队列，队列中存储的是排队的线程 AQS内部还有一个属性state，默认为0。当队列中的一个线程修改state为1，则默认当前线程获取了锁 为保证对state修改的原子性，使用的是CAS操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-10T08:02:44.000Z">
+<meta property="article:modified_time" content="2024-05-10T16:13:05.429Z">
+<meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="面试准备">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">zyl的博客网站</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-5-10面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-10T08:02:44.000Z" itemprop="datePublished">2024-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      5-10面试内容准备
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h2><ul>
+<li>多线程中的抽象队列同步器，是一种<strong>锁机制</strong>，作为一种<strong>基础框架</strong>使用的，例如ReentrantLock、Semaphored、countdownlatch都是基于AQS实现的。</li>
+<li>AQS内部维护了一个先进先出的双向队列，队列中存储的是排队的线程</li>
+<li>AQS内部还有一个属性state，默认为0。当队列中的一个线程修改state为1，则默认当前线程获取了锁</li>
+<li>为保证对state修改的原子性，使用的是CAS操作。</li>
+<li>补充：AQS既能实现公平锁（排在队头的元素先获取锁）也能实现非公平锁（谁抢到算谁的）</li>
+</ul>
+<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><ul>
+<li>可重入锁，调用Lock方法获取了锁之后，再次调用Lock方法不会再阻塞。</li>
+<li>ReentrantLock主要利用<strong>AQS+CAS</strong>实现的。</li>
+<li>支持公平锁和非公平锁，无参构造方法默认是非公平锁，也可以传参设置为公平锁</li>
+</ul>
+<h2 id="Sychronized和lock的区别"><a href="#Sychronized和lock的区别" class="headerlink" title="Sychronized和lock的区别"></a>Sychronized和lock的区别</h2><ul>
+<li>语法层面：sychronized是关键字，lock是接口，jdk提供。退出同步代码块时，sychronized会自动释放；而使用lock需要手动调用unlock方法释放锁。</li>
+<li><strong>功能层面：</strong>lock接口提供了<strong>公平锁、可中断、可超时、多条件变量</strong>等功能。</li>
+<li>性能层面：在竞争激烈时，Lock的实现通常会具体有更好的性能。</li>
+</ul>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>如何进行死锁诊断？1、jsp查看正在等待的线程    2、jstack查看线程运行的情况</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>底层数据结构：</p>
+<p>Jdk1.7之前：分段的数组+链表实现的。</p>
+<p>Jdk1.8之后：数组+链表&#x2F;红黑树实现。</p>
+<p>加锁的方式：</p>
+<p>Jdk1.7之前：使用ReentrantLock锁住Segment数组。</p>
+<p>Jdk1.8之后，使用CAS添加元素，保证添加的原子性。对于链表或者红黑树结点，只锁住他们的首节点。（锁粒度更细，性能更好）</p>
+<h2 id="导致并发程序出现问题的根本原因是什么？"><a href="#导致并发程序出现问题的根本原因是什么？" class="headerlink" title="导致并发程序出现问题的根本原因是什么？"></a>导致并发程序出现问题的根本原因是什么？</h2><ol>
+<li><p>原子性：比如说抢票问题，ticknum–，但是–操作不是一个原子性操作，在底层实现中会先获取ticknum的值，但是如果此时线程阻塞，其他线程获取到值并修改就会出现问题。例如A线程获得ticknum&#x3D;10,阻塞，B线程获取ticketnum&#x3D;10并减1为9，此时A执行ticknum–，还是9。ticknum从10-&gt;9卖出了两次票。</p>
+<p>解决方法：sychronized或lock。</p>
+</li>
+<li><p>有序性问题：发生了指令重排序。解决：volatile关键字</p>
+</li>
+<li><p>可见性问题：JIT会优化代码。解决：volatile关键字</p>
+</li>
+</ol>
+<h2 id="线程池中有哪些常见的阻塞队列"><a href="#线程池中有哪些常见的阻塞队列" class="headerlink" title="线程池中有哪些常见的阻塞队列"></a>线程池中有哪些常见的阻塞队列</h2><ul>
+<li>LinkedBlockingQueue : 默认无界，是懒惰的，创建节点的时候添加数据，有两把锁</li>
+<li>ArrayBlockingQueue : 有界，提前初始化Node数组，有一把锁</li>
+</ul>
+<h2 id="如何确定核心线程数"><a href="#如何确定核心线程数" class="headerlink" title="如何确定核心线程数"></a>如何确定核心线程数</h2><ul>
+<li>高并发，任务执行时间短：CPU核数+1，减少线程上下文的切换</li>
+<li>并发不高，任务执行时间长<ul>
+<li>IO密集型：2N+1</li>
+<li>计算密集型：N+1</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程池的种类"><a href="#线程池的种类" class="headerlink" title="线程池的种类"></a>线程池的种类</h2><ol>
+<li><p>创建使用固定线程数的线程池：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newFixedThreadPool();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>适用于按照顺序执行的任务的线程：单线程化的线程池：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newSingleThreadEexecutor();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可缓存线程池：没有核心线程，只有一个临时线程，存活时间为60s</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newCachedThreadPool();</span><br></pre></td></tr></table></figure>
+
+<p> 适用于任务比较密集，每个任务执行之间比较短</p>
+</li>
+<li><p>可执行延迟任务的线程池，支持定时和周期性执行任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newScheduledThreadPool();</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clw0vmg3w00005wue0w7y7d19" data-title="5-10面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">leetcode刷题记录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 10px;">面试准备</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-10面试内容准备</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">leetcode刷题记录</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/09/%E9%A2%98%E7%9B%AE/">题目</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/">Java语法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/">C++语法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jinniandongtian<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
