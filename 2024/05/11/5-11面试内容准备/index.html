@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>标签: leetcode | zyl的博客网站</title>
+  <title>5-11面试内容准备 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="关于自己解决问题的过程的思考和小项目">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zyl的博客网站">
-<meta property="og:url" content="http://example.com/tags/leetcode/index.html">
+  <meta name="description" content="如何控制某个方法并发访问线程的数量？ 创建Semaphore对象，可以给一个容量 acquire()请求一个信号量，信号量-1 release()释放一个信号量，信号量+1  谈谈你对ThreadLocal的理解 ThreadLocal实现了线程隔离，让每个线程各用各的资源对象，避免争用引发的线程安全问题 ThreadLocal底层维护了ThreadLocalMap类型的内部类，内部维护了一个En">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5-11面试内容准备">
+<meta property="og:url" content="http://example.com/2024/05/11/5-11%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="关于自己解决问题的过程的思考和小项目">
+<meta property="og:description" content="如何控制某个方法并发访问线程的数量？ 创建Semaphore对象，可以给一个容量 acquire()请求一个信号量，信号量-1 release()释放一个信号量，信号量+1  谈谈你对ThreadLocal的理解 ThreadLocal实现了线程隔离，让每个线程各用各的资源对象，避免争用引发的线程安全问题 ThreadLocal底层维护了ThreadLocalMap类型的内部类，内部维护了一个En">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-11T03:20:49.000Z">
+<meta property="article:modified_time" content="2024-05-11T04:25:42.634Z">
 <meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="面试准备">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
@@ -69,39 +72,73 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-09T16:04:46.000Z" itemprop="datePublished">5月 10</time>
+        <section id="main"><article id="post-5-11面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/11/5-11%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-11T03:20:49.000Z" itemprop="datePublished">2024-05-11</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">leetcode刷题记录</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      5-11面试内容准备
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="如何控制某个方法并发访问线程的数量？"><a href="#如何控制某个方法并发访问线程的数量？" class="headerlink" title="如何控制某个方法并发访问线程的数量？"></a>如何控制某个方法并发访问线程的数量？</h2><ol>
+<li>创建Semaphore对象，可以给一个容量</li>
+<li>acquire()请求一个信号量，信号量-1</li>
+<li>release()释放一个信号量，信号量+1</li>
+</ol>
+<h2 id="谈谈你对ThreadLocal的理解"><a href="#谈谈你对ThreadLocal的理解" class="headerlink" title="谈谈你对ThreadLocal的理解"></a>谈谈你对ThreadLocal的理解</h2><ol>
+<li>ThreadLocal实现了线程隔离，让每个线程各用各的资源对象，避免争用引发的线程安全问题</li>
+<li>ThreadLocal底层维护了ThreadLocalMap类型的内部类，内部维护了一个Entry类型的数组。key是ThreadLocal，value是要传入的值。有set、get、remove方法</li>
+<li>内存泄漏：弱引用引起的</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/11/5-11%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clw3czl3300002wue24i3bhk3" data-title="5-11面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          5-12面试内容准备
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">5-10面试内容准备</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
