@@ -71,6 +71,203 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-5-13面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-13T15:37:14.000Z" itemprop="datePublished">2024-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="如何解决缓存穿透问题？"><a href="#如何解决缓存穿透问题？" class="headerlink" title="如何解决缓存穿透问题？"></a>如何解决缓存穿透问题？</h3><ol>
+<li>方法1：缓存空值</li>
+<li>方法2：使用布隆过滤器：用于检索一个元素是否在一个集合中。根据Id，用3个hash函数计算下标存入bitmap数组中。判断id是否存在时，就看计算出的3个位置是否都为1</li>
+</ol>
+<h3 id="如何解决缓存击穿问题？"><a href="#如何解决缓存击穿问题？" class="headerlink" title="如何解决缓存击穿问题？"></a>如何解决缓存击穿问题？</h3><ol>
+<li>方法1：使用逻辑过期（高可用，性能优秀，但是不能保证数据一致性）：设置一个过期时间字段，如果查询到数据过期，就新开一个线程，新线程获取锁，查询数据库并更新缓存。</li>
+<li>方法2：使用互斥锁，当线程查询缓存未命中时都会获得锁，然后查询数据库更新缓存</li>
+</ol>
+<h3 id="如何解决缓存雪崩的问题？"><a href="#如何解决缓存雪崩的问题？" class="headerlink" title="如何解决缓存雪崩的问题？"></a>如何解决缓存雪崩的问题？</h3><p>缓存雪崩：短时间内大量key过期或者redis宕机，导致大量请求到达DB</p>
+<ol>
+<li>设置过期时间TTL为随机值</li>
+<li>使用Redis集群提高服务的可用性</li>
+<li>给缓存业务添加降级限流策略（保底策略）</li>
+<li>给业务添加多级缓存</li>
+</ol>
+<h2 id="如何解决双写一致性的问题？"><a href="#如何解决双写一致性的问题？" class="headerlink" title="如何解决双写一致性的问题？"></a>如何解决双写一致性的问题？</h2><h4 id="强一致性"><a href="#强一致性" class="headerlink" title="强一致性"></a>强一致性</h4><ol>
+<li>延迟双删</li>
+<li>加分布式锁：使用共享锁，读不互斥，写互斥</li>
+</ol>
+<h4 id="非强一致性"><a href="#非强一致性" class="headerlink" title="非强一致性"></a>非强一致性</h4><ol>
+<li>使用MQ消息队列：修改数据时，先写入数据库，再发送一条消息给数据库，redis端监听消息</li>
+<li>使用binlog日志，canal实现</li>
+</ol>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><h4 id="负载均衡是如何实现的？"><a href="#负载均衡是如何实现的？" class="headerlink" title="负载均衡是如何实现的？"></a>负载均衡是如何实现的？</h4><p>文章微服务发起请求，Nacos根据请求拉取相应服务器端口列表，然后根据ribbon去决定调用那个服务器端口</p>
+<p>![image-20240514002036658](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240514002036658.png)</p>
+<h4 id="ribbon的负载均衡策略有哪些？"><a href="#ribbon的负载均衡策略有哪些？" class="headerlink" title="ribbon的负载均衡策略有哪些？"></a>ribbon的负载均衡策略有哪些？</h4><ul>
+<li>轮询</li>
+<li>随机</li>
+<li>权重：响应时间越长，权重越小</li>
+<li>区域敏感：就近原则</li>
+</ul>
+<h4 id="自定义负载均衡如何实现？"><a href="#自定义负载均衡如何实现？" class="headerlink" title="自定义负载均衡如何实现？"></a>自定义负载均衡如何实现？</h4><ol>
+<li>实现IRule接口，指定策略（全局）</li>
+<li>在微服务端的配置文件中配置（局部）</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clw56awwc0000o0ue7pc6hwde" data-title="5-13面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Linux学习记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/13/Linux%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="dt-published" datetime="2024-05-13T14:44:09.000Z" itemprop="datePublished">2024-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/13/Linux%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Linux学习记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Linux不像windows那样分为C盘、D盘等，可以认为他只有一个盘。</p>
+<p>有一个根目录&#x2F;,然后直接分为home、bin、lib、etc等文件夹，我们操作数据一般都是在&#x2F;home&#x2F;用户名 文件夹下操作</p>
+<p>绝对路径:从&#x2F;开始的路径，例如&#x2F;home&#x2F;zyl</p>
+<p>相对路径：从当前路径开始：例如tmp&#x2F;main.cpp</p>
+<p>怎么区分：开头有&#x2F;就是绝对路径</p>
+<p>另外，一个.表示当前目录，..表示上一级目录</p>
+<p>~&#x2F;表示家目录</p>
+<h2 id="文件管理常用命令"><a href="#文件管理常用命令" class="headerlink" title="文件管理常用命令"></a>文件管理常用命令</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl+c <span class="comment">//终止进程</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl+u <span class="comment">//清空本行</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tab <span class="comment">//补全</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls <span class="comment">//展示文件和文件夹</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l <span class="comment">//展示某个文件的详细信息</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每个命令后面添加-h 变得人性化 ，如 ls kill -lh <span class="comment">//1k</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -a <span class="comment">//展示隐藏文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd <span class="comment">//查看当前所处文件目录</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="comment">//创建文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm xxx <span class="comment">//删除普通文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv xxx yyy <span class="comment">//将xxx文件移动到yyy中（可以是路径）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd - <span class="comment">//返回上一个待过的目录</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp a/tmp.txt b <span class="comment">//把a目录里的tmp.txt文件复制到b文件夹</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp a/tmp.txt b/tmp2.txt <span class="comment">//把a目录里的tmp.txt文件复制到b文件夹并重命名</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp a b -r <span class="comment">//把a文件夹整个复制到b文件夹中</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/13/Linux%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-id="clw56awx10001o0ue9jah877o" data-title="Linux学习记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-文章评论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/" class="article-date">
+  <time class="dt-published" datetime="2024-05-13T04:25:07.000Z" itemprop="datePublished">2024-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/">文章评论</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么使用MongoDB？"><a href="#为什么使用MongoDB？" class="headerlink" title="为什么使用MongoDB？"></a>为什么使用MongoDB？</h2><ol>
+<li>文章评论设置了单独的评论微服务模块。涉及到的操作有：评论基本信息查询、分页展示、时间排序、评论状态修改。</li>
+<li>比如查询评论时，往往会同时查询评论的回复数据和和点赞数据，如果使用mysql，必然是一张评论表，一张回复表，要用到join查询，非常消耗性能。</li>
+<li>用mogodb拆查询，使用管道聚合查询方式，将评论点赞、回复信息一并查询出来</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/" data-id="clw56awxj0005o0ue1ocw2b0h" data-title="文章评论" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-5-12面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
@@ -97,7 +294,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyl;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>  &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="comment">// 临界区</span></span><br><span class="line">          System.out.println(<span class="string">&quot;enter main&quot;</span>);</span><br><span class="line">          m1();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//可重入</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">m1</span><span class="params">()</span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;enter m1&quot;</span>);</span><br><span class="line">            m2();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">m2</span><span class="params">()</span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;enter m2&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//enter main</span></span><br><span class="line"><span class="comment">//enter m1</span></span><br><span class="line"><span class="comment">//enter m2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>相比于synchronized：</p>
-<h3 id="可打断"><a href="#可打断" class="headerlink" title="可打断"></a>可打断</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ReentrantLock的特性2：可被打断</span></span><br><span class="line"><span class="comment">//实现方法：用lock.lockInterruptibly();方法获取锁，其他线程调用t1.interrupt()方法打断</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zyl;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Thread.sleep;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 如果没有竞争那么此方法就会获取lock对象锁</span></span><br><span class="line">                <span class="comment">// 如果有竞争就进入阻塞队列，可以被其他线程用interrupt方法打断</span></span><br><span class="line">                System.out.println(<span class="string">&quot;尝试获得锁&quot;</span>);</span><br><span class="line">                lock.lockInterruptibly();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                System.out.println(<span class="string">&quot;没有获得锁&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;获取到锁&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;t1&quot;</span>);</span><br><span class="line"></span><br><span class="line">        lock.lock();</span><br><span class="line">        t1.start();</span><br><span class="line">        </span><br><span class="line">        sleep(<span class="number">1</span>);  <span class="comment">// 让t1运行</span></span><br><span class="line">        System.out.println(<span class="string">&quot;打断 t1&quot;</span>);</span><br><span class="line">        t1.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//尝试获得锁</span></span><br><span class="line"><span class="comment">//打断 t1</span></span><br><span class="line"><span class="comment">//没有获得锁</span></span><br><span class="line"><span class="comment">//java.lang.InterruptedException</span></span><br></pre></td></tr></table></figure>
+<h3 id="可打断-获取锁的过程可被打断，即没获取到锁"><a href="#可打断-获取锁的过程可被打断，即没获取到锁" class="headerlink" title="可打断(获取锁的过程可被打断，即没获取到锁)"></a>可打断(获取锁的过程可被打断，即没获取到锁)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ReentrantLock的特性2：可被打断</span></span><br><span class="line"><span class="comment">//实现方法：用lock.lockInterruptibly();方法获取锁，其他线程调用t1.interrupt()方法打断</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.zyl;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Thread.sleep;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 如果没有竞争那么此方法就会获取lock对象锁</span></span><br><span class="line">                <span class="comment">// 如果有竞争就进入阻塞队列，可以被其他线程用interrupt方法打断</span></span><br><span class="line">                System.out.println(<span class="string">&quot;尝试获得锁&quot;</span>);</span><br><span class="line">                lock.lockInterruptibly();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                System.out.println(<span class="string">&quot;没有获得锁&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;获取到锁&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,<span class="string">&quot;t1&quot;</span>);</span><br><span class="line"></span><br><span class="line">        lock.lock();</span><br><span class="line">        t1.start();</span><br><span class="line">        </span><br><span class="line">        sleep(<span class="number">1</span>);  <span class="comment">// 让t1运行</span></span><br><span class="line">        System.out.println(<span class="string">&quot;打断 t1&quot;</span>);</span><br><span class="line">        t1.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//尝试获得锁</span></span><br><span class="line"><span class="comment">//打断 t1</span></span><br><span class="line"><span class="comment">//没有获得锁</span></span><br><span class="line"><span class="comment">//java.lang.InterruptedException</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -739,275 +936,11 @@
 
 
   
-    <article id="post-5-7面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
-  <time class="dt-published" datetime="2024-05-07T02:32:27.000Z" itemprop="datePublished">2024-05-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5.7面试内容准备</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Spring的生命周期</p>
-<ul>
-<li>将xml配置文件里的bean的配置信息封装成一个BeanDefiniton对象，Spring容器根据BeanDefiniton获取Bean的定义信息</li>
-<li>调用构造函数实例化bean</li>
-<li>bean的依赖注入</li>
-<li>处理Aware接口</li>
-<li>Bean的前置的后置处理器</li>
-<li>初始化方法(InitializingBean、自定义方法)</li>
-<li>Bean的后置的后置处理器</li>
-<li>销毁Bean</li>
-</ul>
-<p>SpringMVC的执行流程(两个版本</p>
-<p>Spring的常见注解有哪些？</p>
-<ul>
-<li>Spring的常见注解<ul>
-<li>声明为Bean：@Component、@Controller、@Service、@Repository</li>
-<li>@Autowired、@Qualifier</li>
-<li>@Bean:用在方法上，将返回结果放入Spring容器</li>
-</ul>
-</li>
-<li>SpringMVC的常见注解：<ul>
-<li>请求：@RequestMapping、@RequestParam、@RequestBody</li>
-<li>响应：@ResponseBody</li>
-<li>其他：@PathVirable、@ResController</li>
-</ul>
-</li>
-<li>SpringBooy的常见注解：<ul>
-<li>@SpringBootConfiguration</li>
-<li>@EnableAutoConfiguration</li>
-<li>@ComponentScan</li>
-</ul>
-</li>
-</ul>
-<p>Spring Cloud的五大组件？</p>
-<ul>
-<li>网关、注册中心、远程调用、负载均衡、服务熔断</li>
-</ul>
-<p>Nacos的作用</p>
-<ul>
-<li>服务注册、服务发现、服务监控</li>
-</ul>
-<p>Kafka如何保证消息不丢失？</p>
-<ul>
-<li>生产者发送消息到Brocker丢失<ul>
-<li>设置失败重试</li>
-<li>设置异步发送，使用回调函数，发送失败重发</li>
-</ul>
-</li>
-<li>存储丢失：<ul>
-<li>设置ack&#x3D;1</li>
-</ul>
-</li>
-<li>消费者<ul>
-<li>手动提交偏移量</li>
-</ul>
-</li>
-</ul>
-<p>Kafka如何保证消息的顺序性</p>
-<ul>
-<li>发送消息时指定分区号</li>
-</ul>
-<p>Kafka集群</p>
-<ul>
-<li>一个Kafka集群由多个broker实例组成，即使某一台宕机，也不耽误其他broker继续对外提供服务</li>
-</ul>
-<p>讲一讲HashMap的扩容机制？</p>
-<p>谈谈你对ThreadLocal的理解？</p>
-<ul>
-<li>ThreadLocalke’yi</li>
-</ul>
-<h1 id="Java并发"><a href="#Java并发" class="headerlink" title="Java并发"></a>Java并发</h1><h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><h5 id="volatile关键字的原子性问题的产生根源"><a href="#volatile关键字的原子性问题的产生根源" class="headerlink" title="volatile关键字的原子性问题的产生根源"></a>volatile关键字的原子性问题的产生根源</h5><ul>
-<li>首先变量增减不是原子性操作，count+&#x3D;5看似是一条指令，实际上编译成字节码是多行代码（非原子操作）</li>
-<li>当两个线程的指令发生错位时，就会导致线程安全问题。</li>
-<li>举例：1、线程A获取变量值为10 。 2、线程B获取变量值为10。3、线程B变量10+5&#x3D;15赋给变量。4、线程A执行10-5&#x3D;5赋给变量。所以变量10在两个线程-5和+5的操作下变成了5</li>
-</ul>
-<h5 id="可见性问题出现的原因以及解决方法"><a href="#可见性问题出现的原因以及解决方法" class="headerlink" title="可见性问题出现的原因以及解决方法"></a>可见性问题出现的原因以及解决方法</h5><ul>
-<li>原因：当一个线程中的一段代码运行次数过多(大概一千万次)时，JIT(Java实时编译器)会进行优化，将代码直接改成已经很多次从内存中读出的结果。因此当别的线程改了主存中的变量值时，此线程获取不到，就会出现可见性问题（<strong>JIT好心办坏事</strong>）。</li>
-<li>解决方法：用volatile关键字修饰，即使代码已经执行了很多次，JIT也不改变变量的值，而是一直让线程去内存获取值，这样内存中的值被其他线程改变时该线程也能及时获取到。（<strong>volatile：****摆烂许可证</strong>）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/07/5-7%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clvwh33qq0000j8ue10wx8tcz" data-title="5.7面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-navicate无法连接docker上的mysql问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
-  <time class="dt-published" datetime="2024-05-05T04:11:03.000Z" itemprop="datePublished">2024-05-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">navicate无法连接docker上的mysql问题解决</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>首先是因为权限问题无法进入docker中的mysql，一直提示拒绝localhost。</p>
-<p>考虑是本地的root权限不足，于是修改本地root权限，修改后如下：</p>
-<p>![](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240505121553616.png)</p>
-<p>root的权限已经变成了%，即所有机器，但还是不行。</p>
-<p>那就移除docker上的mysql容器，重新拉取镜像。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
-
-<p>创建sql容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name mysql5.7 -e MYSQL_ROOT_PASSWORD=我的密码 mysql</span><br></pre></td></tr></table></figure>
-
-<p>进入sql容器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql5.7 bash</span><br></pre></td></tr></table></figure>
-
-<p>root进入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p>输入密码：</p>
-<p>这个时候终于进来了！！这里有个小tips，之前输入密码的时候密码不在屏幕上显示，然后就报错localhost拒绝，我以为是系统问题没把密码输入上，现在才之后屏幕上不显示只是因为安全，拒绝访问是权限问题不是密码问题。</p>
-<p>然后可以修改root密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;新密码&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>授权root远程访问权限</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;password&#x27; WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-
-<p>这个时候时候权限问题就解决了！</p>
-<p>但是navicate还是连接不上，只是换了个报错代码。思索过后，删掉现有navicate上的连接重新建立连接，成功！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="clvt131s10000zcuehml2a0pi" data-title="navicate无法连接docker上的mysql问题解决" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-热点推荐" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" class="article-date">
-  <time class="dt-published" datetime="2024-05-04T15:24:56.000Z" itemprop="datePublished">2024-05-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="定时计算"><a href="#定时计算" class="headerlink" title="定时计算"></a>定时计算</h2><h3 id="整体思路："><a href="#整体思路：" class="headerlink" title="整体思路："></a>整体思路：</h3><ul>
-<li>查询最近几天发布的所有文章</li>
-<li>基于阅读、点赞、评论、收藏计算分值</li>
-<li>按照分值排序</li>
-<li>将数据缓存到<strong>redis</strong>中，app端用户可以直接查询redis。</li>
-</ul>
-<h3 id="XXL-JOB"><a href="#XXL-JOB" class="headerlink" title="XXL-JOB"></a>XXL-JOB</h3><ul>
-<li><h4 id="为什么使用XXL-JOB？"><a href="#为什么使用XXL-JOB？" class="headerlink" title="为什么使用XXL-JOB？"></a>为什么使用XXL-JOB？</h4><p>Spring传统的定时器@Scheduled存在问题：</p>
-<ul>
-<li>做集群任务的重复执行问题，不同的微服务执行同一个任务会出问题。比如在一个分布式应用内有两个发送优惠券的微服务（一个集群），都去执行发送5000张优惠券的任务时就会出现问题。</li>
-<li>cron代码表达式定义在代码中，修改不方便。</li>
-<li>定时任务失败了，无法重试也没有统计。</li>
-<li>如果任务量过大，不能有效的分片执行。</li>
-</ul>
-</li>
-</ul>
-<h3 id="定时计算实现步骤："><a href="#定时计算实现步骤：" class="headerlink" title="定时计算实现步骤："></a>定时计算实现步骤：</h3><ul>
-<li><h4 id="文章微服务中"><a href="#文章微服务中" class="headerlink" title="文章微服务中"></a>文章微服务中</h4><ul>
-<li>查询前5天的文章</li>
-<li>计算每个文章的分值存储到一个list列表中</li>
-<li>调用自媒体微服务的频道接口，将每个频道的前30条热门文章存储到redis中。并将所有文章的前30条热门文章缓存到redis中。</li>
-</ul>
-</li>
-<li><h4 id="用XXL-JOB设置定时任务"><a href="#用XXL-JOB设置定时任务" class="headerlink" title="用XXL-JOB设置定时任务"></a>用XXL-JOB设置定时任务</h4><ul>
-<li>xxl-job中设置执行器和任务</li>
-<li>在文章微服务中继承xxl-job并配置。</li>
-<li>建立任务类，使用@XxlJob注解指定方法执行定期任务</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@XxlJob(&quot;computeHotArticleJob&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务开始执行...&quot;</span>);</span><br><span class="line">        hotArticleService.computeHotArticle();</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务结束...&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="实时计算"><a href="#实时计算" class="headerlink" title="实时计算"></a>实时计算</h2><ul>
-<li>用户行为发送给Kafka Stream流式处理，stream进行聚合处理</li>
-<li>数据聚合后重新发送回Kafka，更新数据库</li>
-<li>重新计算文章分值</li>
-<li>查询redis对应数据</li>
-<li>比较分值，如果分值合适就替换推荐和频道中的文章</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" data-id="clvs9zg390000ycueh4p17a9i" data-title="热点推荐" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -1021,7 +954,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
     </div>
   </div>
 
@@ -1031,7 +964,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 16.67px;">面试准备</a>
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 16.67px;">面试准备</a>
     </div>
   </div>
 
@@ -1053,23 +986,23 @@
       <ul>
         
           <li>
+            <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/13/Linux%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Linux学习记录</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/">文章评论</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-12面试内容准备</a>
           </li>
         
           <li>
             <a href="/2024/05/11/5-11%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-11面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-10面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">leetcode刷题记录</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/09/%E9%A2%98%E7%9B%AE/">题目</a>
           </li>
         
       </ul>

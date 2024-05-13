@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Elasticsearch学习记录 | zyl的博客网站</title>
+  <title>5-13面试内容准备 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="关于自己解决问题的过程的思考和小项目">
+  <meta name="description" content="Redis如何解决缓存穿透问题？ 方法1：缓存空值 方法2：使用布隆过滤器：用于检索一个元素是否在一个集合中。根据Id，用3个hash函数计算下标存入bitmap数组中。判断id是否存在时，就看计算出的3个位置是否都为1  如何解决缓存击穿问题？ 方法1：使用逻辑过期（高可用，性能优秀，但是不能保证数据一致性）：设置一个过期时间字段，如果查询到数据过期，就新开一个线程，新线程获取锁，查询数据库并更">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Elasticsearch学习记录">
-<meta property="og:url" content="http://example.com/2024/05/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="5-13面试内容准备">
+<meta property="og:url" content="http://example.com/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="关于自己解决问题的过程的思考和小项目">
+<meta property="og:description" content="Redis如何解决缓存穿透问题？ 方法1：缓存空值 方法2：使用布隆过滤器：用于检索一个元素是否在一个集合中。根据Id，用3个hash函数计算下标存入bitmap数组中。判断id是否存在时，就看计算出的3个位置是否都为1  如何解决缓存击穿问题？ 方法1：使用逻辑过期（高可用，性能优秀，但是不能保证数据一致性）：设置一个过期时间字段，如果查询到数据过期，就新开一个线程，新线程获取锁，查询数据库并更">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-03T14:52:01.000Z">
-<meta property="article:modified_time" content="2024-05-03T14:52:01.242Z">
+<meta property="article:published_time" content="2024-05-13T15:37:14.000Z">
+<meta property="article:modified_time" content="2024-05-13T16:23:10.129Z">
 <meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="面试准备">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
@@ -71,10 +72,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Elasticsearch学习记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-5-13面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/05/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
-  <time class="dt-published" datetime="2024-05-03T14:52:01.000Z" itemprop="datePublished">2024-05-03</time>
+    <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-13T15:37:14.000Z" itemprop="datePublished">2024-05-13</time>
 </a>
     
   </div>
@@ -85,7 +86,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Elasticsearch学习记录
+      5-13面试内容准备
     </h1>
   
 
@@ -93,33 +94,61 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="如何解决缓存穿透问题？"><a href="#如何解决缓存穿透问题？" class="headerlink" title="如何解决缓存穿透问题？"></a>如何解决缓存穿透问题？</h3><ol>
+<li>方法1：缓存空值</li>
+<li>方法2：使用布隆过滤器：用于检索一个元素是否在一个集合中。根据Id，用3个hash函数计算下标存入bitmap数组中。判断id是否存在时，就看计算出的3个位置是否都为1</li>
+</ol>
+<h3 id="如何解决缓存击穿问题？"><a href="#如何解决缓存击穿问题？" class="headerlink" title="如何解决缓存击穿问题？"></a>如何解决缓存击穿问题？</h3><ol>
+<li>方法1：使用逻辑过期（高可用，性能优秀，但是不能保证数据一致性）：设置一个过期时间字段，如果查询到数据过期，就新开一个线程，新线程获取锁，查询数据库并更新缓存。</li>
+<li>方法2：使用互斥锁，当线程查询缓存未命中时都会获得锁，然后查询数据库更新缓存</li>
+</ol>
+<h3 id="如何解决缓存雪崩的问题？"><a href="#如何解决缓存雪崩的问题？" class="headerlink" title="如何解决缓存雪崩的问题？"></a>如何解决缓存雪崩的问题？</h3><p>缓存雪崩：短时间内大量key过期或者redis宕机，导致大量请求到达DB</p>
+<ol>
+<li>设置过期时间TTL为随机值</li>
+<li>使用Redis集群提高服务的可用性</li>
+<li>给缓存业务添加降级限流策略（保底策略）</li>
+<li>给业务添加多级缓存</li>
+</ol>
+<h2 id="如何解决双写一致性的问题？"><a href="#如何解决双写一致性的问题？" class="headerlink" title="如何解决双写一致性的问题？"></a>如何解决双写一致性的问题？</h2><h4 id="强一致性"><a href="#强一致性" class="headerlink" title="强一致性"></a>强一致性</h4><ol>
+<li>延迟双删</li>
+<li>加分布式锁：使用共享锁，读不互斥，写互斥</li>
+</ol>
+<h4 id="非强一致性"><a href="#非强一致性" class="headerlink" title="非强一致性"></a>非强一致性</h4><ol>
+<li>使用MQ消息队列：修改数据时，先写入数据库，再发送一条消息给数据库，redis端监听消息</li>
+<li>使用binlog日志，canal实现</li>
+</ol>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><h4 id="负载均衡是如何实现的？"><a href="#负载均衡是如何实现的？" class="headerlink" title="负载均衡是如何实现的？"></a>负载均衡是如何实现的？</h4><p>文章微服务发起请求，Nacos根据请求拉取相应服务器端口列表，然后根据ribbon去决定调用那个服务器端口</p>
+<p>![image-20240514002036658](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240514002036658.png)</p>
+<h4 id="ribbon的负载均衡策略有哪些？"><a href="#ribbon的负载均衡策略有哪些？" class="headerlink" title="ribbon的负载均衡策略有哪些？"></a>ribbon的负载均衡策略有哪些？</h4><ul>
+<li>轮询</li>
+<li>随机</li>
+<li>权重：响应时间越长，权重越小</li>
+<li>区域敏感：就近原则</li>
+</ul>
+<h4 id="自定义负载均衡如何实现？"><a href="#自定义负载均衡如何实现？" class="headerlink" title="自定义负载均衡如何实现？"></a>自定义负载均衡如何实现？</h4><ol>
+<li>实现IRule接口，指定策略（全局）</li>
+<li>在微服务端的配置文件中配置（局部）</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-id="clvrjq47a0000pgueh45t1t51" data-title="Elasticsearch学习记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clw56awwc0000o0ue7pc6hwde" data-title="5-13面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          乐观锁在项目中的应用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/05/13/Linux%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Elasticsearch在项目中的应用</div>
+      <div class="article-nav-title">Linux学习记录</div>
     </a>
   
 </nav>
