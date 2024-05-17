@@ -71,6 +71,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ThreadLocal在项目中的应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-05-02T06:02:29.000Z" itemprop="datePublished">2024-05-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">ThreadLocal在项目中的应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="在哪里用的ThreadLocal？"><a href="#在哪里用的ThreadLocal？" class="headerlink" title="在哪里用的ThreadLocal？"></a>在哪里用的ThreadLocal？</h2><p>用ThreadLocal保存登录用户的信息。</p>
+<h2 id="为什么要用ThreadLocal？"><a href="#为什么要用ThreadLocal？" class="headerlink" title="为什么要用ThreadLocal？"></a>为什么要用ThreadLocal？</h2><p>方便随时随地获取用户的信息。</p>
+<h2 id="如何用ThreadLocal保存用户信息？"><a href="#如何用ThreadLocal保存用户信息？" class="headerlink" title="如何用ThreadLocal保存用户信息？"></a>如何用ThreadLocal保存用户信息？</h2><ul>
+<li>1、在网关中解析token获取userId,并存入header</li>
+<li>2、在自媒体拦截器中获取userId，用ThreadLocal工具将wmUser自媒体对象存入本地线程</li>
+<li>3、写一个拦截器配置类使拦截器生效</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" data-id="clvoujozg0000ogueb3xygz0e" data-title="ThreadLocal在项目中的应用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-文章发布流程-5-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/" class="article-date">
@@ -260,6 +307,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
           </li>
         
@@ -273,10 +324,6 @@
         
           <li>
             <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-12面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/11/5-11%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-11面试内容准备</a>
           </li>
         
       </ul>

@@ -71,6 +71,137 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-5-14面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-05-14T04:34:06.000Z" itemprop="datePublished">2024-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Spring中bean注入到beanfactory中的方式有哪些？"><a href="#Spring中bean注入到beanfactory中的方式有哪些？" class="headerlink" title="Spring中bean注入到beanfactory中的方式有哪些？"></a>Spring中bean注入到beanfactory中的方式有哪些？</h3><ol>
+<li>xml文件配置方式</li>
+<li>@Component注解</li>
+<li>@Configuration注解</li>
+<li>@Bean注解</li>
+<li>@Service、@Repository、@Controller注解</li>
+</ol>
+<h3 id="Mybatis-Plus链式编程"><a href="#Mybatis-Plus链式编程" class="headerlink" title="Mybatis-Plus链式编程"></a>Mybatis-Plus链式编程</h3><p>查询操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lambdaQuery() <span class="comment">//生成查询链</span></span><br><span class="line">    .eq(Entity::getId,value) <span class="comment">//条件项</span></span><br><span class="line">    .one(); <span class="comment">//获取的结果集</span></span><br></pre></td></tr></table></figure>
+
+<p>更新操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lambdaQuery() <span class="comment">//生成查询链</span></span><br><span class="line">    .eq(Entity::getId,“id”) <span class="comment">//条件项</span></span><br><span class="line">    .set(Entity::getName,<span class="string">&quot;张三&quot;</span>); <span class="comment">//设置值</span></span><br><span class="line">    .update(); <span class="comment">//进行的操作</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="如何定位慢查询？"><a href="#如何定位慢查询？" class="headerlink" title="如何定位慢查询？"></a>如何定位慢查询？</h3><ol>
+<li>使用工具Skywalking</li>
+<li>开启MySQL自带的慢查询日志，设置一个阈值，一旦某个接口查询的时间超过阈值就会记录到日志中</li>
+</ol>
+<h3 id="如果SQL语句执行很慢，如何分析优化呢？"><a href="#如果SQL语句执行很慢，如何分析优化呢？" class="headerlink" title="如果SQL语句执行很慢，如何分析优化呢？"></a>如果SQL语句执行很慢，如何分析优化呢？</h3><ol>
+<li>使用exlplain语句查询执行计划</li>
+<li>通过key和key_len检查是否走了索引</li>
+<li>通过type字段查看是否有进一步优化的空间</li>
+<li>通过extra判断是否出现了回表的情况</li>
+</ol>
+<h3 id="什么是索引？索引的底层数据结构了解吗？"><a href="#什么是索引？索引的底层数据结构了解吗？" class="headerlink" title="什么是索引？索引的底层数据结构了解吗？"></a>什么是索引？索引的底层数据结构了解吗？</h3><p>索引是帮助MySQL高效获取数据的数据结构，主要是用来提高数据库的检索效率，降低数据库的IO成本，同时通过索引对数据进行排序，降低数据排序的成本（创建索引时就需要排序）。</p>
+<p>选择B+树的原因：</p>
+<ol>
+<li>阶数更多，路径更短</li>
+<li>只有叶子结点存储数据，查找效率更加稳定</li>
+<li>方便范围查找</li>
+</ol>
+<h3 id="聚簇索引和非聚簇索引-以及-什么是回表查询？"><a href="#聚簇索引和非聚簇索引-以及-什么是回表查询？" class="headerlink" title="聚簇索引和非聚簇索引 以及 什么是回表查询？"></a>聚簇索引和非聚簇索引 以及 什么是回表查询？</h3><ol>
+<li>聚簇索引：数据和索引结构放在一块，B+树的叶子节点保存了整行数据，有且只有一个</li>
+<li>非聚簇索引：数据和索引分开存储，B+树的叶子节点保存对应的<strong>主键</strong>，可有多个</li>
+<li>回表查询：通过二级索引找到对应的主键值，再到聚簇索引中查找整行数据，就是回表</li>
+</ol>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><ol>
+<li><p>覆盖索引是指查询使用了索引，所返回的列，必须在索引中全部能够找到</p>
+</li>
+<li><p>MySQL超大分页怎么处理？<strong>提升查询效率，就用覆盖索引</strong>，在数据量比较大时，limit分页查询，需要对数据进行排序，效率低</p>
+<p>解决方案：覆盖索引+子查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select * </span><br><span class="line">from tb_sku t,</span><br><span class="line"> (select id from tb_sku order by limit 900000,10) a    //子查询是覆盖索引</span><br><span class="line">where t.id = a.id;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="索引创建的原则有哪些？"><a href="#索引创建的原则有哪些？" class="headerlink" title="索引创建的原则有哪些？"></a>索引创建的原则有哪些？</h3><ol>
+<li>数据量比较大，且查询比较频繁的表(重要)</li>
+<li>常用作查询条件、排序、分组的字段（重要）</li>
+<li>尽量使用联合索引（重要）</li>
+<li>要控制索引的数量（重要）</li>
+<li>使用NOT NULL去约束字段</li>
+<li>使用区分度高的字段</li>
+<li>字段的长度较长时，可以针对字段的特点，建立前缀索引</li>
+</ol>
+<h3 id="导致索引失效的情况"><a href="#导致索引失效的情况" class="headerlink" title="导致索引失效的情况"></a>导致索引失效的情况</h3><ol>
+<li>违反最左前缀法则</li>
+<li>范围查询右边的列，不能使用索引</li>
+<li>在索引上进行运算操作会导致索引失效</li>
+<li>字符串不加单引号</li>
+<li>模糊查询有可能导致索引失效</li>
+</ol>
+<h3 id="SQL语句的优化"><a href="#SQL语句的优化" class="headerlink" title="SQL语句的优化"></a>SQL语句的优化</h3><ol>
+<li>避免使用select *</li>
+<li>避免导致索引失效的写法<ul>
+<li>违反最左前缀匹配原则</li>
+<li>范围查询右边的列索引会失效</li>
+</ul>
+</li>
+<li>尽量用union all 代替 union，因为union会将查询结果进行过滤</li>
+<li>避免在where子句中对字段进行表达式操作</li>
+<li>Join优化，能用inner join就不用left join和right join，INNER JOIN 只返回匹配的行，而 LEFT JOIN 则返回左表的所有行，不匹配的行则设置为空</li>
+</ol>
+<h3 id="并发事务问题"><a href="#并发事务问题" class="headerlink" title="并发事务问题"></a>并发事务问题</h3><ol>
+<li>脏读：一个事务读到了另一个事务没有提交的数据</li>
+<li>不可重复读：在一个事务内部两次读取到的数据不一样</li>
+<li>幻读：一个事务查询数据时没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了“幻影”</li>
+</ol>
+<h3 id="MySQL日志"><a href="#MySQL日志" class="headerlink" title="MySQL日志"></a>MySQL日志</h3><ol>
+<li>redo log （重做日志）：物理日志，用于数据持久化</li>
+<li>undo log：逻辑日志，提供回滚和MVCC</li>
+<li>redo log保证了数据的持久性，undo log保证了数据的原子性和一致性</li>
+</ol>
+<h3 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h3><ol>
+<li>垂直分库：以表为依据，根据业务将不同表拆分到不同库中</li>
+<li>垂直分表：将表中字段分到不同表中</li>
+<li>水平分库：将一个库的数据拆分到多个库中</li>
+<li>水平分表：将一个表的数据分散到多个表中</li>
+<li>分库会出现的问题：<ul>
+<li>分布式事务一致性问题</li>
+<li>主键避重</li>
+<li>跨节点关联查询</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clwaayhwf0000acue420g15r4" data-title="5-14面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-5-13面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
@@ -884,58 +1015,6 @@
 
 
   
-    <article id="post-C-语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2024-05-08T04:45:47.000Z" itemprop="datePublished">2024-05-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/">C++语法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>读入字符数组char s[100]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s); cin&gt;&gt;s  <span class="comment">//从下标0开始</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>); cin&gt;&gt;s+<span class="number">1</span>  <span class="comment">//从下标1开始</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,&amp;s[<span class="number">1</span>]) cin&gt;&gt;s[<span class="number">1</span>]<span class="comment">//读入s[1]</span></span><br></pre></td></tr></table></figure>
-
-<p>以上都是读到空格或回车结束，下面是不结束的</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fgets</span>(s,<span class="number">10000</span>,stdin);</span><br><span class="line">cin.<span class="built_in">getline</span>(s,<span class="number">100</span>); </span><br></pre></td></tr></table></figure>
-
-<p>输出字符数组，两者等价</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">puts</span>(s);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,s)</span><br></pre></td></tr></table></figure>
-
-<p>读入字符串string</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getline</span>(cin,s);</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/08/C-%E8%AF%AD%E6%B3%95/" data-id="clvxocq9p00000wue9y3lct2y" data-title="C++语法" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -986,6 +1065,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
           </li>
         
@@ -999,10 +1082,6 @@
         
           <li>
             <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-12面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/11/5-11%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-11面试内容准备</a>
           </li>
         
       </ul>
