@@ -71,6 +71,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Kafka学习记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="dt-published" datetime="2024-05-03T03:33:33.000Z" itemprop="datePublished">2024-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Kafka如何保证消息有序性？"><a href="#Kafka如何保证消息有序性？" class="headerlink" title="Kafka如何保证消息有序性？"></a>Kafka如何保证消息有序性？</h3><p>topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。<strong>所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。</strong></p>
+<h1 id="Kafka-stream"><a href="#Kafka-stream" class="headerlink" title="Kafka stream"></a>Kafka stream</h1><ul>
+<li>流式计算与批量计算的区别：电梯和扶梯的区别</li>
+<li>实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控、公交车实时数据</li>
+<li>流式计算技术选型：Hadoop、Apache Storm、Flink、Kafka Stream</li>
+<li>重要的数据结构：KStream，类似于map。KStream数据流就是一段顺序的、可以无限长、不断更新的数据集</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-id="clvq4jufo00006ouefvn8dgac" data-title="Kafka学习记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-ThreadLocal在项目中的应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="article-date">
@@ -307,6 +354,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/18/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
           </li>
         
@@ -320,10 +371,6 @@
         
           <li>
             <a href="/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/">文章评论</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-12面试内容准备</a>
           </li>
         
       </ul>

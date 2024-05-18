@@ -71,6 +71,316 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2024-05-08T06:28:39.000Z" itemprop="datePublished">2024-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/08/Java%E8%AF%AD%E6%B3%95/">Java语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>byte一个字节占8位，因为是有符号数，所以最大数为01111111，7位1，最大值2e6，最大和就是2e7。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>隐式类型转换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span> + <span class="number">2</span>;</span><br><span class="line">System.out.println(t); <span class="comment">// t = 67</span></span><br></pre></td></tr></table></figure>
+
+<p>原则：向更高类型转换（char –&gt; int）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">z</span> <span class="operator">=</span> <span class="number">4</span> * <span class="number">3.3</span>;</span><br><span class="line">System.out.println(z); <span class="comment">// z = 13.2</span></span><br></pre></td></tr></table></figure>
+
+<p>先将4转换为double再相乘</p>
+<p>Java取整机制：<strong>向零取整</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(-<span class="number">3</span>/<span class="number">2</span>); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
+<p>有效数字：double的有效数字为16位，float位7位（都是整数位+小数位），有效位数之内的数一定是正确的</p>
+<p>判断两个浮点数是否相等：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>,y=<span class="number">1</span>;</span><br><span class="line">     <span class="keyword">if</span>(Math.abs(x-y) &lt; <span class="number">1e-6</span>)&#123;</span><br><span class="line">         System.out.println(<span class="string">&quot;x=y&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="读入与输出"><a href="#读入与输出" class="headerlink" title="读入与输出"></a>读入与输出</h2><h3 id="读入"><a href="#读入" class="headerlink" title="读入"></a>读入</h3><h4 id="用Scanner对象"><a href="#用Scanner对象" class="headerlink" title="用Scanner对象"></a>用Scanner对象</h4><p>Java读入字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">         <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">         <span class="comment">// 读入字符串</span></span><br><span class="line">         <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">         System.out.println(str);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读入整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.nextInt();</span><br></pre></td></tr></table></figure>
+
+<h4 id="用BufferReader和InputStreamReader对象"><a href="#用BufferReader和InputStreamReader对象" class="headerlink" title="用BufferReader和InputStreamReader对象"></a>用BufferReader和InputStreamReader对象</h4><p>读字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">       <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">       <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> br.readLine();</span><br><span class="line">       System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span>  <span class="operator">=</span> Integer.parseInt(br.readLine());</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span>  <span class="operator">=</span> Integer.parseInt(br.readLine());</span><br><span class="line">System.out.println(x + y);</span><br></pre></td></tr></table></figure>
+
+<p>在一行读整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(System.in));</span><br><span class="line">String str[] = br.readLine().split(<span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span>  <span class="operator">=</span> Integer.parseInt(str[<span class="number">0</span>]);</span><br><span class="line"><span class="type">int</span> <span class="variable">y</span>  <span class="operator">=</span> Integer.parseInt(str[<span class="number">1</span>]);</span><br><span class="line"> System.out.println(x + y);</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>输出：除了println还有printf函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d %.2f\n&quot;</span>,<span class="number">4</span>,<span class="number">123.456</span>); <span class="comment">//不足4位前面补0</span></span><br></pre></td></tr></table></figure>
+
+<p>尤其用在输出日期   （%2d不加0就是空格补齐）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d-%2d-%02d&quot;</span>,<span class="number">2024</span>,<span class="number">5</span>,<span class="number">8</span>); <span class="comment">//2024- 5-08 </span></span><br></pre></td></tr></table></figure>
+
+<p>%-4d从后面补齐</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%04d-%-2d-%02d&quot;</span>,<span class="number">2024</span>,<span class="number">5</span>,<span class="number">8</span>); <span class="comment">//2024-5 -08 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="BufferWriter对象"><a href="#BufferWriter对象" class="headerlink" title="BufferWriter对象"></a>BufferWriter对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">      <span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(System.out));</span><br><span class="line">      bw.write(<span class="string">&quot;Hello world&quot;</span>);</span><br><span class="line">      bw.flush();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Java数组"><a href="#Java数组" class="headerlink" title="Java数组"></a>Java数组</h3><p>数组初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a; <span class="comment">//a未被初始化，长度为0，数组为空</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];  <span class="comment">//仅初始化长度，数组元素为0</span></span><br><span class="line">System.out.printf(<span class="string">&quot;%d %d %d&quot;</span>,b[<span class="number">0</span>],b[<span class="number">1</span>],b[<span class="number">2</span>]); <span class="comment">// 0 0 0 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] a = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>&#125;; <span class="comment">//初始化的另一种方式</span></span><br><span class="line">System.out.printf(<span class="string">&quot;%d %d %d&quot;</span>,a[<span class="number">0</span>],a[<span class="number">1</span>],a[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>数组排序API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(a); <span class="comment">//排序</span></span><br></pre></td></tr></table></figure>
+
+<p>倒序排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(q,(x,y) -&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> y-x;</span><br><span class="line">&#125;); <span class="comment">//返回值为正数时，将x排在y的后面 </span></span><br></pre></td></tr></table></figure>
+
+<p>数组长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.length;</span><br></pre></td></tr></table></figure>
+
+<p>输出数组，此方法把每个元素用逗号隔开，且从第二个元素开始前面加一个空格</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString(q) <span class="comment">//[1, 2, 3, 4, 9]的形式</span></span><br></pre></td></tr></table></figure>
+
+<p>填充数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.fill(int[] a,int val) </span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p><strong>注意：在Java中String是不可变的，所以对String进行改变之后会生成一个全新的字符串，地址会进行改变</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">a</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">b</span> <span class="operator">=</span> a.toUpperCase();</span><br><span class="line">System.out.println(a);</span><br><span class="line">System.out.println(b); </span><br><span class="line"><span class="comment">//Hello World</span></span><br><span class="line"><span class="comment">//HELLO WORLD 原串没有发生变化，只有新串变化了</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.length(); <span class="comment">//字符串长度带括号，数组长度不带括号</span></span><br></pre></td></tr></table></figure>
+
+<p>访问字符串某个元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.charAt(i)</span><br></pre></td></tr></table></figure>
+
+<p>字符串和整数相加，会转换成字符串（布尔类型也是）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">d</span> <span class="operator">=</span> <span class="string">&quot;my age is &quot;</span> + <span class="number">18</span>;</span><br><span class="line">System.out.println(d); <span class="comment">//my age is 18</span></span><br></pre></td></tr></table></figure>
+
+<p>格式化输出字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> String.format(<span class="string">&quot;my age is %d&quot;</span>,<span class="number">18</span>);</span><br><span class="line">System.out.println(str); <span class="comment">//my age is 18</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串转换成double</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">money_str</span> <span class="operator">=</span> <span class="string">&quot;123.45&quot;</span>;</span><br><span class="line"><span class="type">double</span> <span class="variable">money</span> <span class="operator">=</span> Double.parseDouble(money_str);</span><br><span class="line">System.out.println(money); <span class="comment">//123.45</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串转换成整数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">money_str</span> <span class="operator">=</span> <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">money</span> <span class="operator">=</span> Integer.parseInt(money_str);</span><br><span class="line">System.out.println(money); <span class="comment">//123</span></span><br></pre></td></tr></table></figure>
+
+<p>整数转换成字符串（基本数据类型整数）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">money</span> <span class="operator">=</span> <span class="number">123</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">money_str</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span> + money;</span><br><span class="line">System.out.println(money_str); <span class="comment">//123</span></span><br></pre></td></tr></table></figure>
+
+<p>整数转换成字符串（包装数据类型整数）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">money</span> <span class="operator">=</span> <span class="number">123</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">money_str</span> <span class="operator">=</span> money.toString();</span><br><span class="line">System.out.println(money_str); <span class="comment">//123</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串分割成字符串数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World zyl&quot;</span>;</span><br><span class="line">String[] strs = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">System.out.println(Arrays.toString(strs));  <span class="comment">//[Hello, World, zyl]</span></span><br></pre></td></tr></table></figure>
+
+<p>返回某个元素在字符串中的第一次出现的下标（没有返回-1）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">System.out.println(str.indexOf(<span class="string">&quot;o&quot;</span>)); <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>比较两个字符串是否相等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.equals(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>比较两个字符串大小(按字典序)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">System.out.println(str.compareTo(<span class="string">&quot;hello world&quot;</span>)); <span class="comment">//小于返回负数-32</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串转换为大小写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str.toUpperCase() <span class="comment">// 转大写</span></span><br><span class="line">str.toLowerCase() <span class="comment">// 转小写</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串替换(前者被后者代替)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">System.out.println(str.replace(<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;L&#x27;</span>)); <span class="comment">//HeLLo WorLd</span></span><br></pre></td></tr></table></figure>
+
+<p>取子串（从第一个参数开始，到第二个参数结束，第二个参数取不到）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">System.out.println(str.substring(<span class="number">1</span>,<span class="number">3</span>)); <span class="comment">//el</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串转换成char数组，<strong>方便遍历字符串</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">   <span class="type">char</span>[] cs = str.toCharArray();</span><br><span class="line">      <span class="keyword">for</span>(<span class="type">char</span> c : cs)&#123;</span><br><span class="line">          System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="StringBuilder的使用"><a href="#StringBuilder的使用" class="headerlink" title="StringBuilder的使用"></a>StringBuilder的使用</h4><p>String不允许修改，但是StringBuilder允许修改</p>
+<p>添加字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">sb.append(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">System.out.println(sb); <span class="comment">// HelloWorld</span></span><br></pre></td></tr></table></figure>
+
+<p>修改某个位置的字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将每一个字符换成ASCII表中的下一个字符</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;sb.length();i++)&#123;</span><br><span class="line">    sb.setCharAt(i,(<span class="type">char</span>)(sb.charAt(i) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(sb); <span class="comment">//Ifmmpxpsme</span></span><br></pre></td></tr></table></figure>
+
+<p>翻转字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sb.reverse();</span><br><span class="line">System.out.println(sb); <span class="comment">//dlrowolleH</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>八大基本数据类型和String都是值传递</p>
+<p><strong>其他类型都是引用传递</strong>，例如StringBuilder</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(StringBuilder sb)</span>&#123;</span><br><span class="line">        sb.append(<span class="string">&quot;Hello word&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        f(sb);</span><br><span class="line">        System.out.println(sb); <span class="comment">//Hello word</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>引用传递传递的是地址，所以改变形参实参会跟着改变</p>
+<p>但是如果给形参开辟一段新的地址，那么实参就不会发生变化</p>
+<p>（所以说实际上引用传递也是值传递，只不过传递的是一个地址的值）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(StringBuilder str)</span>&#123;</span><br><span class="line">      str = <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;Hello World&quot;</span>); <span class="comment">//开辟了一段新的地址空间，不会改变传过来的地址的值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;11&quot;</span>);</span><br><span class="line">        f(sb);</span><br><span class="line">        System.out.println(sb); <span class="comment">//11</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>翻转数组示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span>[] a)</span>&#123;</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=a.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i&lt;j)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> a[i];</span><br><span class="line">            a[i] = a[j];</span><br><span class="line">            a[j] = temp;</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] a = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">        f(a);</span><br><span class="line">        System.out.println(Arrays.toString(a));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是：Java中的包装基本类型也是引用传递</p>
+<p>Java实现交换两个数的值，要把两个数放在数组或者类中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span>[] a)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> a[<span class="number">0</span>];</span><br><span class="line">        a[<span class="number">0</span>] = a[<span class="number">1</span>];</span><br><span class="line">        a[<span class="number">1</span>] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] a = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">        System.out.println(<span class="string">&quot;交换之前：&quot;</span> + a[<span class="number">0</span>] +<span class="string">&quot; &quot;</span> + a[<span class="number">1</span>]); <span class="comment">// 1 2</span></span><br><span class="line">        f(a);</span><br><span class="line">        System.out.println(<span class="string">&quot;交换之后：&quot;</span> + a[<span class="number">0</span>] +<span class="string">&quot; &quot;</span> + a[<span class="number">1</span>]); <span class="comment">// 2 1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>否则如果直接传递int类型不会改变原值，因为传递的是值的副本。</p>
+<p>哪怕是用包装的基本类型也没用，因为传递过去只是交换了形参的地址指向，实参的地址没有被改变</p>
+<h4 id="函数的重载："><a href="#函数的重载：" class="headerlink" title="函数的重载："></a>函数的重载：</h4><p>在同一个类中，函数的名称相同，参数列表和返回值不同。</p>
+<p>当调用同名函数时，会根据参数类型找到最合适的函数</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>如果成员变量不加修饰符，只能在同一个包内可以访问</p>
+<p>静态成员变量可以认为是一个公有的变量（公有财产）</p>
+<p>Java子类必须有构造函数，且子类构造函数必须调用其父类的构造函数</p>
+<p>多态的体现：子类调用与父类同名的函数，但是优先使用子类的函数。</p>
+<p>多态的好处：<strong>可以让各个子类对象调用一个方法实现各自的功能</strong>。比如：LOL中每个英雄上来会说一句话，如果没有多态。要写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(第一个英雄) h1.greet()</span><br><span class="line">else if(第二个英雄) h2.great();</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<p>如果使用多态，只需共同继承一个父类，然后重写对应的greet()方法就可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hero hreo;</span><br><span class="line">h1.greet();</span><br><span class="line">h2.great();</span><br></pre></td></tr></table></figure>
+
+<h4 id="接口的多态"><a href="#接口的多态" class="headerlink" title="接口的多态"></a>接口的多态</h4><p>定义一个英雄接口数组，两个元素，一个是宙斯，另一个是雅典娜。</p>
+<p>遍历数组调用greet()函数，那么每个英雄会会调用各自的函数实现。</p>
+<h2 id="Java容器"><a href="#Java容器" class="headerlink" title="Java容器"></a>Java容器</h2><h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>添加元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.add(<span class="number">20</span>);</span><br><span class="line">System.out.println(list); <span class="comment">//[1, 2, 20]</span></span><br></pre></td></tr></table></figure>
+
+<p>清空元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.clear();</span><br></pre></td></tr></table></figure>
+
+<p>返回长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.size();</span><br></pre></td></tr></table></figure>
+
+<p>判断是否为空</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.isEmpty();</span><br></pre></td></tr></table></figure>
+
+<p>访问某个元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.get(i);</span><br></pre></td></tr></table></figure>
+
+<p>改变某个元素的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.set(i,list.get(i)+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="stack-栈是一个类"><a href="#stack-栈是一个类" class="headerlink" title="stack (栈是一个类)"></a>stack (栈是一个类)</h4><p>定义一个栈</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;Integer&gt; stk = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>压入栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.push(1);</span><br></pre></td></tr></table></figure>
+
+<p>弹出栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.pop();</span><br></pre></td></tr></table></figure>
+
+<p>输出栈顶元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stk.peek();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;Integer&gt; stk = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">stk.push(<span class="number">1</span>);</span><br><span class="line">stk.push(<span class="number">2</span>);</span><br><span class="line">stk.push(<span class="number">10</span>);</span><br><span class="line">System.out.println(stk.pop()); <span class="comment">//10</span></span><br><span class="line">System.out.println(stk.peek()); <span class="comment">//2</span></span><br><span class="line">System.out.println(stk); <span class="comment">//[1,2]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Queue（队列是一个接口）"><a href="#Queue（队列是一个接口）" class="headerlink" title="Queue（队列是一个接口）"></a>Queue（队列是一个接口）</h4><p>用LinkedList定义一个接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; q = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;(); <span class="comment">//linkedList实现了deque接口</span></span><br></pre></td></tr></table></figure>
+
+<p>添加元素</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.add(1);</span><br></pre></td></tr></table></figure>
+
+<p>删除队头元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">q.add(<span class="number">1</span>);</span><br><span class="line">q.add(<span class="number">2</span>);</span><br><span class="line">q.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(q.remove()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>返回队头元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(q.peek());</span><br></pre></td></tr></table></figure>
+
+<p>优先队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;();</span><br><span class="line">q.add(<span class="number">2</span>);</span><br><span class="line">q.add(<span class="number">1</span>);</span><br><span class="line">q.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(q); <span class="comment">//[1,2,10]</span></span><br></pre></td></tr></table></figure>
+
+<p>优先队列是用小根堆来实现的（堆排序）</p>
+<p>堆排序的步骤：先建堆，再破坏堆，拿出堆顶元素。</p>
+<p>定义大根堆的优先队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(Collections.reverseOrder());</span><br><span class="line">q.add(<span class="number">2</span>);</span><br><span class="line">q.add(<span class="number">1</span>);</span><br><span class="line">q.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(q); <span class="comment">//[10, 1, 2]</span></span><br></pre></td></tr></table></figure>
+
+<p>倒序输出优先队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(q.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">      System.out.println(q.remove()); <span class="comment">//10 2 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><h5 id="HashSet（无序）"><a href="#HashSet（无序）" class="headerlink" title="HashSet（无序）"></a>HashSet（无序）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>判断某个数是否存在</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set.add(<span class="number">1</span>);</span><br><span class="line">set.add(<span class="number">2</span>);</span><br><span class="line">set.add(<span class="number">10</span>);</span><br><span class="line">System.out.println(set.contains(<span class="number">5</span>)); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>删除某个元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.remove();</span><br></pre></td></tr></table></figure>
+
+<p>遍历一个set</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set.add(<span class="number">45</span>);</span><br><span class="line">set.add(<span class="number">296</span>);</span><br><span class="line">set.add(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> x : set)&#123;</span><br><span class="line">      System.out.println(x);</span><br><span class="line">&#125; <span class="comment">// 296 10 45</span></span><br></pre></td></tr></table></figure>
+
+<p>可见HashSet是无序的</p>
+<h5 id="TreeSet（有序）基于红黑树实现"><a href="#TreeSet（有序）基于红黑树实现" class="headerlink" title="TreeSet（有序）基于红黑树实现"></a>TreeSet（有序）基于红黑树实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TreeSet&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;();</span><br><span class="line">set.add(<span class="number">45</span>);</span><br><span class="line">set.add(<span class="number">296</span>);</span><br><span class="line">set.add(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> x : set)&#123;</span><br><span class="line">     System.out.println(x);</span><br><span class="line">&#125; <span class="comment">//10 45 296</span></span><br></pre></td></tr></table></figure>
+
+<p>返回&gt;&#x3D;某个数的最小值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.ceiling(<span class="number">45</span>)</span><br></pre></td></tr></table></figure>
+
+<p>返回&lt;&#x3D;某个数的最大值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set.floor(<span class="number">40</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><h5 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;123&quot;</span>,<span class="number">2</span>);</span><br><span class="line">map.put(<span class="string">&quot;321&quot;</span>,<span class="number">3</span>);</span><br><span class="line">map.put(<span class="string">&quot;21&quot;</span>,<span class="number">10</span>);</span><br><span class="line">System.out.println(map.get(<span class="string">&quot;123&quot;</span>)); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(map.get(<span class="string">&quot;1233&quot;</span>)); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>判断某个键是否存在</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(map.containsKey(<span class="string">&quot;123&quot;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>删除某个键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">map.remove(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(map.containsKey(<span class="string">&quot;123&quot;</span>)); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>获取HashMap中的元素数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.size();</span><br></pre></td></tr></table></figure>
+
+<p>**!**遍历HashMap中的元素（用Map.Entry&lt;K,V&gt;）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="string">&quot;123&quot;</span>,<span class="number">2</span>);</span><br><span class="line">map.put(<span class="string">&quot;321&quot;</span>,<span class="number">3</span>);</span><br><span class="line">map.put(<span class="string">&quot;21&quot;</span>,<span class="number">10</span>);</span><br><span class="line"><span class="keyword">for</span>(Map.Entry&lt;String,Integer&gt; entry : map.entrySet())&#123;</span><br><span class="line">      System.out.printf(<span class="string">&quot;%s %d\n&quot;</span>,entry.getKey(),entry.getValue());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 123 2</span></span><br><span class="line"><span class="comment">// 321 3</span></span><br><span class="line"><span class="comment">// 21 10</span></span><br></pre></td></tr></table></figure>
+
+<p>返回&gt;&#x3D;某个键值的最小的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TreeMap&lt;Integer,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;();</span><br><span class="line">map.put(<span class="number">123</span>,<span class="number">2</span>);</span><br><span class="line">map.put(<span class="number">321</span>,<span class="number">3</span>);</span><br><span class="line">map.put(<span class="number">21</span>,<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">Map.Entry&lt;Integer,Integer&gt; up = map.ceilingEntry(<span class="number">123</span>);</span><br><span class="line">System.out.println(up); <span class="comment">//123=2</span></span><br></pre></td></tr></table></figure>
+
+<p>返回&gt;&#x3D;某个键值的最大的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map.Entry&lt;Integer,Integer&gt; up = map.floorEntry(<span class="number">122</span>);</span><br><span class="line">System.out.println(up); <span class="comment">//21=10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>运行时异常：</p>
+<p>非运行型异常，即检查型异常：</p>
+<p>​	两种处理方式：抛出异常或者捕获异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">()</span>&#123;</span><br><span class="line">       <span class="type">int</span>[] array = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>];</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</span><br><span class="line">           array[i] = i ;</span><br><span class="line">       <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">       <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">       <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           array[k] /= x;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (ArithmeticException e)&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;除以零啦！&quot;</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (ArrayIndexOutOfBoundsException e)&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;数组越界啦！&quot;</span>);</span><br><span class="line">       &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">           <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">               System.out.printf(<span class="string">&quot;array[%d] = %d\n&quot;</span>,i,array[i]);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       System.out.println(<span class="string">&quot;程序执行完啦！&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>即使catch中有return语句，finally中的语句依然会执行</p>
+<p>异常信息API</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.getMessage();</span><br></pre></td></tr></table></figure>
+
+<p>异常路径API</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e.printStackTrace();</span><br></pre></td></tr></table></figure>
+
+<p>调用处理异常方法与不调用的区别是：调用方法后程序不会终止</p>
+<h5 id="抛异常"><a href="#抛异常" class="headerlink" title="抛异常"></a>抛异常</h5><p>throw：在函数内部调用</p>
+<p>throws:在函数外部抛出一些可能会出现的异常</p>
+<h5 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String line;</span><br><span class="line"><span class="keyword">try</span>(</span><br><span class="line">          <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;input.txt&quot;</span>));</span><br><span class="line">          <span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;src/output.txt&quot;</span>));</span><br><span class="line">       )&#123;</span><br><span class="line">           <span class="keyword">while</span> ((line = br.readLine()) != <span class="literal">null</span>)&#123;</span><br><span class="line">               System.out.println(<span class="string">&quot;Line =&gt; &quot;</span> + line);</span><br><span class="line">               bw.write(<span class="string">&quot;Copy: &quot;</span> + line + <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">         &#125;</span><br><span class="line">           bw.flush();</span><br><span class="line">   &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">           System.out.println(e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/08/Java%E8%AF%AD%E6%B3%95/" data-id="clvxocq9s00010wue8pzbdwvl" data-title="Java语法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-C-语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/08/C-%E8%AF%AD%E6%B3%95/" class="article-date">
@@ -642,53 +952,6 @@
 
 
   
-    <article id="post-Kafka学习记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
-  <time class="dt-published" datetime="2024-05-03T03:33:33.000Z" itemprop="datePublished">2024-05-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="Kafka如何保证消息有序性？"><a href="#Kafka如何保证消息有序性？" class="headerlink" title="Kafka如何保证消息有序性？"></a>Kafka如何保证消息有序性？</h3><p>topic分区中的消息只能由消费者组中的唯一消费者处理，所以消息肯定是按照先后顺序处理的。但是也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。<strong>所以，如果想顺序的处理Topic的所有消息，那就只能提供一个分区。</strong></p>
-<h1 id="Kafka-stream"><a href="#Kafka-stream" class="headerlink" title="Kafka stream"></a>Kafka stream</h1><ul>
-<li>流式计算与批量计算的区别：电梯和扶梯的区别</li>
-<li>实时流式计算的应用场景：对用户的日志监控、对网站的数据看板监控、公交车实时数据</li>
-<li>流式计算技术选型：Hadoop、Apache Storm、Flink、Kafka Stream</li>
-<li>重要的数据结构：KStream，类似于map。KStream数据流就是一段顺序的、可以无限长、不断更新的数据集</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" data-id="clvq4jufo00006ouefvn8dgac" data-title="Kafka学习记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -739,6 +1002,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/18/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
           </li>
         
@@ -752,10 +1019,6 @@
         
           <li>
             <a href="/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/">文章评论</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/12/5-12%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-12面试内容准备</a>
           </li>
         
       </ul>
