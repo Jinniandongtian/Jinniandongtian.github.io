@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>归档 | zyl的博客网站</title>
+  <title>vue3中el-table数据渲染不出来的问题 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="关于自己解决问题的过程的思考和小项目">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zyl的博客网站">
-<meta property="og:url" content="http://example.com/archives/page/3/index.html">
+  <meta name="description" content="问题：今天新学vue3语法终于能集成axios从后端请求数据，但是请求出来的tableData却在el-table里渲染不出，用控制台可以打印。 123456function getList()&#123;   getAll().then(res &#x3D;&gt;&#123;     tableData &#x3D; res.data;     console.log(tableData);   &#125;)&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3中el-table数据渲染不出来的问题">
+<meta property="og:url" content="http://example.com/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="关于自己解决问题的过程的思考和小项目">
+<meta property="og:description" content="问题：今天新学vue3语法终于能集成axios从后端请求数据，但是请求出来的tableData却在el-table里渲染不出，用控制台可以打印。 123456function getList()&#123;   getAll().then(res &#x3D;&gt;&#123;     tableData &#x3D; res.data;     console.log(tableData);   &#125;)&amp;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-29T09:23:09.000Z">
+<meta property="article:modified_time" content="2024-05-29T09:33:29.975Z">
 <meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="前端踩坑记录">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
@@ -69,159 +72,68 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T08:10:48.000Z" itemprop="datePublished">5月 3</time>
+        <section id="main"><article id="post-vue3中el-table数据渲染不出来的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2024-05-29T09:23:09.000Z" itemprop="datePublished">2024-05-29</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/Elasticsearch%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">Elasticsearch在项目中的应用</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue3中el-table数据渲染不出来的问题
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T04:11:28.000Z" itemprop="datePublished">5月 3</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/%E8%87%AA%E5%AA%92%E4%BD%93%E6%96%87%E7%AB%A0%E4%B8%8A%E4%B8%8B%E6%9E%B6/">自媒体文章上下架</a>
-    </h1>
-  
+        <h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>今天新学vue3语法终于能集成axios从后端请求数据，但是请求出来的tableData却在el-table里渲染不出，用控制台可以打印。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getList</span>(<span class="params"></span>)&#123;</span><br><span class="line">   <span class="title function_">getAll</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span>&#123;</span><br><span class="line">     tableData = res.<span class="property">data</span>;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(tableData);</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T03:33:33.000Z" itemprop="datePublished">5月 3</time>
-</a>
+<p>![image-20240529173226845](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240529173226845.png)</p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>网上搜索过后才知，原来用reactive([]声明出来的数组不会被认为是动态数组，所以在如下传值时</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableData = res.<span class="property">data</span></span><br></pre></td></tr></table></figure>
+
+<p>tableData仍然为空，所以数据不显示。</p>
+<h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>使用js数组自带的push方法，逐渐将数据增加到tableData中来，这样长度会逐渐增加，达到动态数组的效果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getList</span>(<span class="params"></span>)&#123;</span><br><span class="line">   <span class="title function_">getAll</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; res.<span class="property">data</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">       tableData.<span class="title function_">push</span>(res.<span class="property">data</span>[i])</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据终于正常显示！</p>
+<p>![image-20240529173325827](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240529173325827.png)</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-02T06:02:29.000Z" itemprop="datePublished">5月 2</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="clwrmpp500000s8ue6eqedbsg" data-title="vue3中el-table数据渲染不出来的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/02/ThreadLocal%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">ThreadLocal在项目中的应用</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-02T05:31:23.000Z" itemprop="datePublished">5月 2</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/02/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B-5-2/">文章发布流程-5.2</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/01/demoArticle/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-01T12:44:12.821Z" itemprop="datePublished">5月 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/01/demoArticle/">demo文章</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">网关的作用</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/01/hello-world/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-01T09:20:07.458Z" itemprop="datePublished">5月 1</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/01/hello-world/">Hello World</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; 上一页</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
 
 </section>
         

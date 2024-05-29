@@ -71,6 +71,104 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue3中el-table数据渲染不出来的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2024-05-29T09:23:09.000Z" itemprop="datePublished">2024-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/">vue3中el-table数据渲染不出来的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>今天新学vue3语法终于能集成axios从后端请求数据，但是请求出来的tableData却在el-table里渲染不出，用控制台可以打印。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getList</span>(<span class="params"></span>)&#123;</span><br><span class="line">   <span class="title function_">getAll</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span>&#123;</span><br><span class="line">     tableData = res.<span class="property">data</span>;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(tableData);</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>![image-20240529173226845](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240529173226845.png)</p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>网上搜索过后才知，原来用reactive([]声明出来的数组不会被认为是动态数组，所以在如下传值时</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableData = res.<span class="property">data</span></span><br></pre></td></tr></table></figure>
+
+<p>tableData仍然为空，所以数据不显示。</p>
+<h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>使用js数组自带的push方法，逐渐将数据增加到tableData中来，这样长度会逐渐增加，达到动态数组的效果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getList</span>(<span class="params"></span>)&#123;</span><br><span class="line">   <span class="title function_">getAll</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; res.<span class="property">data</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">       tableData.<span class="title function_">push</span>(res.<span class="property">data</span>[i])</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数据终于正常显示！</p>
+<p>![image-20240529173325827](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240529173325827.png)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="clwrmpp500000s8ue6eqedbsg" data-title="vue3中el-table数据渲染不出来的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-网关的作用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-05-20T15:15:58.000Z" itemprop="datePublished">2024-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/">网关的作用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><ol>
+<li>在pom文件中集成了注册中心和配置中心</li>
+<li>bootstrap.yml文件配置注册中心nacos</li>
+<li>nacos中配置路由</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/" data-id="clwrmpp6n0001s8ue61fx99cg" data-title="网关的作用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-算法模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/18/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/" class="article-date">
@@ -677,90 +775,6 @@
 
 
   
-    <article id="post-leetcode刷题记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="article-date">
-  <time class="dt-published" datetime="2024-05-09T16:04:46.000Z" itemprop="datePublished">2024-05-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">leetcode刷题记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160 - 相交链表"></a>160 - 相交链表</h2><p>会用Java写链表了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyl;</span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ListNode</span>&#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode(<span class="type">int</span> val)&#123;</span><br><span class="line">        <span class="built_in">this</span>.val = val;</span><br><span class="line">        next = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title function_">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> &#123;</span><br><span class="line">        Set&lt;ListNode&gt; visited = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;ListNode&gt;();</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> headA;</span><br><span class="line">        <span class="keyword">while</span>(temp!=<span class="literal">null</span>)&#123;</span><br><span class="line">            visited.add(temp);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = headB;</span><br><span class="line">        <span class="keyword">while</span>(temp!=<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(visited.contains(temp))&#123;</span><br><span class="line">                <span class="keyword">return</span> temp;</span><br><span class="line">            &#125;</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//定义链表1</span></span><br><span class="line">        List&lt;ListNode&gt; list1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        list1.add(<span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">1</span>));</span><br><span class="line">        list1.add(<span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">9</span>));</span><br><span class="line">        list1.add(<span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">1</span>));</span><br><span class="line">        list1.add(<span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">2</span>));</span><br><span class="line">        list1.add(<span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">4</span>));</span><br><span class="line">        <span class="comment">// 依次将头节点连起来</span></span><br><span class="line">        list1.get(<span class="number">0</span>).next = list1.get(<span class="number">1</span>);</span><br><span class="line">        list1.get(<span class="number">1</span>).next = list1.get(<span class="number">2</span>);</span><br><span class="line">        list1.get(<span class="number">2</span>).next = list1.get(<span class="number">3</span>);</span><br><span class="line">        list1.get(<span class="number">3</span>).next = list1.get(<span class="number">4</span>);</span><br><span class="line">        <span class="comment">// 定义链表2</span></span><br><span class="line">        List&lt;ListNode&gt; list2 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        list2.add(<span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">3</span>));</span><br><span class="line">        <span class="comment">//连起来</span></span><br><span class="line">        list2.get(<span class="number">0</span>).next = list1.get(<span class="number">3</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">r</span> <span class="operator">=</span> getIntersectionNode(list1.get(<span class="number">0</span>),list2.get(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(r.val);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (NullPointerException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/10/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" data-id="clvzfyu6q0000kgue01si7n16" data-title="leetcode刷题记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-题目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/09/%E9%A2%98%E7%9B%AE/" class="article-date">
-  <time class="dt-published" datetime="2024-05-09T11:02:09.000Z" itemprop="datePublished">2024-05-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/09/%E9%A2%98%E7%9B%AE/">题目</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>![image-20240509190228169](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240509190228169.png)</p>
-<p>![image-20240509190747876](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240509190747876.png)</p>
-<p>![image-20240509192810217](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240509192810217.png)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/09/%E9%A2%98%E7%9B%AE/" data-id="clvzfyu7v0001kgue8msu5swu" data-title="题目" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -779,7 +793,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
     </div>
   </div>
 
@@ -789,7 +803,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 16.67px;">面试准备</a>
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">前端踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 16.67px;">面试准备</a>
     </div>
   </div>
 
@@ -811,6 +825,14 @@
       <ul>
         
           <li>
+            <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/">vue3中el-table数据渲染不出来的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/">网关的作用</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/18/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a>
           </li>
         
@@ -820,14 +842,6 @@
         
           <li>
             <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/13/Linux%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Linux学习记录</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/13/%E6%96%87%E7%AB%A0%E8%AF%84%E8%AE%BA/">文章评论</a>
           </li>
         
       </ul>
