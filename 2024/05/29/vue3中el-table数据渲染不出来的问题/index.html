@@ -14,9 +14,9 @@
 <meta property="og:description" content="问题：今天新学vue3语法终于能集成axios从后端请求数据，但是请求出来的tableData却在el-table里渲染不出，用控制台可以打印。 123456function getList()&#123;   getAll().then(res &#x3D;&gt;&#123;     tableData &#x3D; res.data;     console.log(tableData);   &#125;)&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-29T09:23:09.000Z">
-<meta property="article:modified_time" content="2024-05-29T09:33:29.975Z">
+<meta property="article:modified_time" content="2024-05-30T06:37:54.148Z">
 <meta property="article:author" content="Jinniandongtian">
-<meta property="article:tag" content="前端踩坑记录">
+<meta property="article:tag" content="vue3踩坑记录">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
@@ -107,6 +107,10 @@
 
 <p>数据终于正常显示！</p>
 <p>![image-20240529173325827](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240529173325827.png)</p>
+<p>5.30补充：当页面加载完成，重新调用load()方法后，tableData会被重复增加后台数据</p>
+<p>解决：每次重新加载load()函数前将tableData置为空。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//改变页码尺寸</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleSizeChange</span>(<span class="params">size</span>)&#123;</span><br><span class="line">  pageSize.<span class="property">value</span> = size;</span><br><span class="line">  tableData = <span class="title function_">reactive</span>([]) <span class="comment">//将tableData置为空，防止重复请求后台数据</span></span><br><span class="line">  <span class="title function_">load</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -115,13 +119,22 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li></ul>
 
     </footer>
   </div>
   
     
 <nav id="article-nav">
+  
+    <a href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          vue3+element-plus中el-dialog无法显示的问题
+        
+      </div>
+    </a>
   
   
     <a href="/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
@@ -146,7 +159,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
     </div>
   </div>
 
@@ -156,7 +169,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">前端踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 16.67px;">面试准备</a>
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 12.5px;">vue3踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 17.5px;">面试准备</a>
     </div>
   </div>
 
@@ -178,6 +191,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">vue3+element-plus中el-dialog无法显示的问题</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/">vue3中el-table数据渲染不出来的问题</a>
           </li>
         
@@ -191,10 +208,6 @@
         
           <li>
             <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
           </li>
         
       </ul>

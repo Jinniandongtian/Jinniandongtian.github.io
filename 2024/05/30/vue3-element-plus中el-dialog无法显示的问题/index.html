@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>标签: 框架学习 | zyl的博客网站</title>
+  <title>vue3+element-plus中el-dialog无法显示的问题 | zyl的博客网站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="关于自己解决问题的过程的思考和小项目">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zyl的博客网站">
-<meta property="og:url" content="http://example.com/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/index.html">
+  <meta name="description" content="问题：修改el-dialog的v-model属性为true后不显示 原因：变量定义方式不对，应该用const修饰，而不是let（不知道原因）。 1const addDialogVisible &#x3D; ref(false)  但要注意，使用const修饰后不能在函数中修改为true，不然会报错，应该在html中修改 1&lt;el-button plain type&#x3D;&quot;primary&amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3+element-plus中el-dialog无法显示的问题">
+<meta property="og:url" content="http://example.com/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="zyl的博客网站">
-<meta property="og:description" content="关于自己解决问题的过程的思考和小项目">
+<meta property="og:description" content="问题：修改el-dialog的v-model属性为true后不显示 原因：变量定义方式不对，应该用const修饰，而不是let（不知道原因）。 1const addDialogVisible &#x3D; ref(false)  但要注意，使用const修饰后不能在函数中修改为true，不然会报错，应该在html中修改 1&lt;el-button plain type&#x3D;&quot;primary&amp;quot">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-30T06:37:22.000Z">
+<meta property="article:modified_time" content="2024-05-30T06:42:24.085Z">
 <meta property="article:author" content="Jinniandongtian">
+<meta property="article:tag" content="vue3踩坑记录">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="zyl的博客网站" type="application/atom+xml">
@@ -69,39 +72,62 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-05-03T03:33:33.000Z" itemprop="datePublished">5月 3</time>
+        <section id="main"><article id="post-vue3-element-plus中el-dialog无法显示的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2024-05-30T06:37:22.000Z" itemprop="datePublished">2024-05-30</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/05/03/Kafka%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">Kafka学习记录</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue3+element-plus中el-dialog无法显示的问题
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>修改el-dialog的v-model属性为true后不显示</p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>变量定义方式不对，应该用const修饰，而不是let（不知道原因）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addDialogVisible = <span class="title function_">ref</span>(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但要注意，使用const修饰后不能在函数中修改为true，不然会报错，应该在html中修改</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">plain</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addDialogVisible = true&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>vue3+element-plus有很多小毛病</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="clwsw1mxe00006wue95kr3jbj" data-title="vue3+element-plus中el-dialog无法显示的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">vue3中el-table数据渲染不出来的问题</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

@@ -71,6 +71,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue3-element-plus中el-dialog无法显示的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2024-05-30T06:37:22.000Z" itemprop="datePublished">2024-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">vue3+element-plus中el-dialog无法显示的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>修改el-dialog的v-model属性为true后不显示</p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>变量定义方式不对，应该用const修饰，而不是let（不知道原因）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addDialogVisible = <span class="title function_">ref</span>(<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但要注意，使用const修饰后不能在函数中修改为true，不然会报错，应该在html中修改</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">plain</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addDialogVisible = true&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>vue3+element-plus有很多小毛病</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="clwsw1mxe00006wue95kr3jbj" data-title="vue3+element-plus中el-dialog无法显示的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-vue3中el-table数据渲染不出来的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
@@ -106,6 +154,10 @@
 
 <p>数据终于正常显示！</p>
 <p>![image-20240529173325827](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240529173325827.png)</p>
+<p>5.30补充：当页面加载完成，重新调用load()方法后，tableData会被重复增加后台数据</p>
+<p>解决：每次重新加载load()函数前将tableData置为空。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//改变页码尺寸</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">handleSizeChange</span>(<span class="params">size</span>)&#123;</span><br><span class="line">  pageSize.<span class="property">value</span> = size;</span><br><span class="line">  tableData = <span class="title function_">reactive</span>([]) <span class="comment">//将tableData置为空，防止重复请求后台数据</span></span><br><span class="line">  <span class="title function_">load</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -114,7 +166,7 @@
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li></ul>
 
     </footer>
   </div>
@@ -675,106 +727,6 @@
 
 
   
-    <article id="post-5-10面试内容准备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" class="article-date">
-  <time class="dt-published" datetime="2024-05-10T08:02:44.000Z" itemprop="datePublished">2024-05-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-10面试内容准备</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h2><ul>
-<li>多线程中的抽象队列同步器，是一种<strong>锁机制</strong>，作为一种<strong>基础框架</strong>使用的，例如ReentrantLock、Semaphored、countdownlatch都是基于AQS实现的。</li>
-<li>AQS内部维护了一个先进先出的双向队列，队列中存储的是排队的线程</li>
-<li>AQS内部还有一个属性state，默认为0。当队列中的一个线程修改state为1，则默认当前线程获取了锁</li>
-<li>为保证对state修改的原子性，使用的是CAS操作。</li>
-<li>补充：AQS既能实现公平锁（排在队头的元素先获取锁）也能实现非公平锁（谁抢到算谁的）</li>
-</ul>
-<h2 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h2><ul>
-<li>可重入锁，调用Lock方法获取了锁之后，再次调用Lock方法不会再阻塞。</li>
-<li>ReentrantLock主要利用<strong>AQS+CAS</strong>实现的。</li>
-<li>支持公平锁和非公平锁，无参构造方法默认是非公平锁，也可以传参设置为公平锁</li>
-</ul>
-<h2 id="Sychronized和lock的区别"><a href="#Sychronized和lock的区别" class="headerlink" title="Sychronized和lock的区别"></a>Sychronized和lock的区别</h2><ul>
-<li>语法层面：sychronized是关键字，lock是接口，jdk提供。退出同步代码块时，sychronized会自动释放；而使用lock需要手动调用unlock方法释放锁。</li>
-<li><strong>功能层面：</strong>lock接口提供了<strong>公平锁、可中断、可超时、多条件变量</strong>等功能。</li>
-<li>性能层面：在竞争激烈时，Lock的实现通常会具体有更好的性能。</li>
-</ul>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>如何进行死锁诊断？1、jsp查看正在等待的线程    2、jstack查看线程运行的情况</p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>底层数据结构：</p>
-<p>Jdk1.7之前：分段的数组+链表实现的。</p>
-<p>Jdk1.8之后：数组+链表&#x2F;红黑树实现。</p>
-<p>加锁的方式：</p>
-<p>Jdk1.7之前：使用ReentrantLock锁住Segment数组。</p>
-<p>Jdk1.8之后，使用CAS添加元素，保证添加的原子性。对于链表或者红黑树结点，只锁住他们的首节点。（锁粒度更细，性能更好）</p>
-<h2 id="导致并发程序出现问题的根本原因是什么？"><a href="#导致并发程序出现问题的根本原因是什么？" class="headerlink" title="导致并发程序出现问题的根本原因是什么？"></a>导致并发程序出现问题的根本原因是什么？</h2><ol>
-<li><p>原子性：比如说抢票问题，ticknum–，但是–操作不是一个原子性操作，在底层实现中会先获取ticknum的值，但是如果此时线程阻塞，其他线程获取到值并修改就会出现问题。例如A线程获得ticknum&#x3D;10,阻塞，B线程获取ticketnum&#x3D;10并减1为9，此时A执行ticknum–，还是9。ticknum从10-&gt;9卖出了两次票。</p>
-<p>解决方法：sychronized或lock。</p>
-</li>
-<li><p>有序性问题：发生了指令重排序。解决：volatile关键字</p>
-</li>
-<li><p>可见性问题：JIT会优化代码。解决：volatile关键字</p>
-</li>
-</ol>
-<h2 id="线程池中有哪些常见的阻塞队列"><a href="#线程池中有哪些常见的阻塞队列" class="headerlink" title="线程池中有哪些常见的阻塞队列"></a>线程池中有哪些常见的阻塞队列</h2><ul>
-<li>LinkedBlockingQueue : 默认无界，是懒惰的，创建节点的时候添加数据，有两把锁</li>
-<li>ArrayBlockingQueue : 有界，提前初始化Node数组，有一把锁</li>
-</ul>
-<h2 id="如何确定核心线程数"><a href="#如何确定核心线程数" class="headerlink" title="如何确定核心线程数"></a>如何确定核心线程数</h2><ul>
-<li>高并发，任务执行时间短：CPU核数+1，减少线程上下文的切换</li>
-<li>并发不高，任务执行时间长<ul>
-<li>IO密集型：2N+1</li>
-<li>计算密集型：N+1</li>
-</ul>
-</li>
-</ul>
-<h2 id="线程池的种类"><a href="#线程池的种类" class="headerlink" title="线程池的种类"></a>线程池的种类</h2><ol>
-<li><p>创建使用固定线程数的线程池：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newFixedThreadPool();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>适用于按照顺序执行的任务的线程：单线程化的线程池：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newSingleThreadEexecutor();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可缓存线程池：没有核心线程，只有一个临时线程，存活时间为60s</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newCachedThreadPool();</span><br></pre></td></tr></table></figure>
-
-<p> 适用于任务比较密集，每个任务执行之间比较短</p>
-</li>
-<li><p>可执行延迟任务的线程池，支持定时和周期性执行任务</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newScheduledThreadPool();</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/10/5-10%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/" data-id="clw0vmg3w00005wue0w7y7d19" data-title="5-10面试内容准备" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -793,7 +745,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">前端踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
     </div>
   </div>
 
@@ -803,7 +755,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">前端踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 16.67px;">面试准备</a>
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 12.5px;">vue3踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 17.5px;">面试准备</a>
     </div>
   </div>
 
@@ -825,6 +777,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">vue3+element-plus中el-dialog无法显示的问题</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/">vue3中el-table数据渲染不出来的问题</a>
           </li>
         
@@ -838,10 +794,6 @@
         
           <li>
             <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/13/5-13%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-13面试内容准备</a>
           </li>
         
       </ul>
