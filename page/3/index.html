@@ -71,6 +71,254 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-navicate无法连接docker上的mysql问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time class="dt-published" datetime="2024-05-05T04:11:03.000Z" itemprop="datePublished">2024-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">navicate无法连接docker上的mysql问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>首先是因为权限问题无法进入docker中的mysql，一直提示拒绝localhost。</p>
+<p>考虑是本地的root权限不足，于是修改本地root权限，修改后如下：</p>
+<p>![](C:\Users\stack hello\AppData\Roaming\Typora\typora-user-images\image-20240505121553616.png)</p>
+<p>root的权限已经变成了%，即所有机器，但还是不行。</p>
+<p>那就移除docker上的mysql容器，重新拉取镜像。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<p>创建sql容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name mysql5.7 -e MYSQL_ROOT_PASSWORD=我的密码 mysql</span><br></pre></td></tr></table></figure>
+
+<p>进入sql容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql5.7 bash</span><br></pre></td></tr></table></figure>
+
+<p>root进入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>输入密码：</p>
+<p>这个时候终于进来了！！这里有个小tips，之前输入密码的时候密码不在屏幕上显示，然后就报错localhost拒绝，我以为是系统问题没把密码输入上，现在才之后屏幕上不显示只是因为安全，拒绝访问是权限问题不是密码问题。</p>
+<p>然后可以修改root密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;新密码&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>授权root远程访问权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;password&#x27; WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候时候权限问题就解决了！</p>
+<p>但是navicate还是连接不上，只是换了个报错代码。思索过后，删掉现有navicate上的连接重新建立连接，成功！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/05/navicate%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5docker%E4%B8%8A%E7%9A%84mysql%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="clvt131s10000zcuehml2a0pi" data-title="navicate无法连接docker上的mysql问题解决" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-热点推荐" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T15:24:56.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/">热点推荐</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="定时计算"><a href="#定时计算" class="headerlink" title="定时计算"></a>定时计算</h2><h3 id="整体思路："><a href="#整体思路：" class="headerlink" title="整体思路："></a>整体思路：</h3><ul>
+<li>查询最近几天发布的所有文章</li>
+<li>基于阅读、点赞、评论、收藏计算分值</li>
+<li>按照分值排序</li>
+<li>将数据缓存到<strong>redis</strong>中，app端用户可以直接查询redis。</li>
+</ul>
+<h3 id="XXL-JOB"><a href="#XXL-JOB" class="headerlink" title="XXL-JOB"></a>XXL-JOB</h3><ul>
+<li><h4 id="为什么使用XXL-JOB？"><a href="#为什么使用XXL-JOB？" class="headerlink" title="为什么使用XXL-JOB？"></a>为什么使用XXL-JOB？</h4><p>Spring传统的定时器@Scheduled存在问题：</p>
+<ul>
+<li>做集群任务的重复执行问题，不同的微服务执行同一个任务会出问题。比如在一个分布式应用内有两个发送优惠券的微服务（一个集群），都去执行发送5000张优惠券的任务时就会出现问题。</li>
+<li>cron代码表达式定义在代码中，修改不方便。</li>
+<li>定时任务失败了，无法重试也没有统计。</li>
+<li>如果任务量过大，不能有效的分片执行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="定时计算实现步骤："><a href="#定时计算实现步骤：" class="headerlink" title="定时计算实现步骤："></a>定时计算实现步骤：</h3><ul>
+<li><h4 id="文章微服务中"><a href="#文章微服务中" class="headerlink" title="文章微服务中"></a>文章微服务中</h4><ul>
+<li>查询前5天的文章</li>
+<li>计算每个文章的分值存储到一个list列表中</li>
+<li>调用自媒体微服务的频道接口，将每个频道的前30条热门文章存储到redis中。并将所有文章的前30条热门文章缓存到redis中。</li>
+</ul>
+</li>
+<li><h4 id="用XXL-JOB设置定时任务"><a href="#用XXL-JOB设置定时任务" class="headerlink" title="用XXL-JOB设置定时任务"></a>用XXL-JOB设置定时任务</h4><ul>
+<li>xxl-job中设置执行器和任务</li>
+<li>在文章微服务中继承xxl-job并配置。</li>
+<li>建立任务类，使用@XxlJob注解指定方法执行定期任务</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@XxlJob(&quot;computeHotArticleJob&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务开始执行...&quot;</span>);</span><br><span class="line">        hotArticleService.computeHotArticle();</span><br><span class="line">        log.info(<span class="string">&quot;热文章分值计算调度任务结束...&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实时计算"><a href="#实时计算" class="headerlink" title="实时计算"></a>实时计算</h2><ul>
+<li>用户行为发送给Kafka Stream流式处理，stream进行聚合处理</li>
+<li>数据聚合后重新发送回Kafka，更新数据库</li>
+<li>重新计算文章分值</li>
+<li>查询redis对应数据</li>
+<li>比较分值，如果分值合适就替换推荐和频道中的文章</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/%E7%83%AD%E7%82%B9%E6%8E%A8%E8%8D%90/" data-id="clvs9zg390000ycueh4p17a9i" data-title="热点推荐" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-延迟任务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T07:57:06.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/">延迟任务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>文章发布时，不管设置的发布时间是当下时间还是未来时间，都要将文章交由<strong>延迟任务微服务</strong>，由它去判断什么时间进行文章审核。</p>
+<p>除了文章发布外，其他操作也可能使用到延迟任务，所以才将延迟任务做成一个单独的微服务。</p>
+<p>使用redis进行任务数据的存储。</p>
+<p>为了在并发的情况下保证数据的准确性，采用数据库锁机制，在项目中集成的是乐观锁。</p>
+<h5 id="在分布式下，为了让其中一个微服务下的一个线程去执行指定方法，我们采用redis实现分布式锁的方案。"><a href="#在分布式下，为了让其中一个微服务下的一个线程去执行指定方法，我们采用redis实现分布式锁的方案。" class="headerlink" title="在分布式下，为了让其中一个微服务下的一个线程去执行指定方法，我们采用redis实现分布式锁的方案。"></a>在分布式下，为了让其中一个微服务下的一个线程去执行指定方法，我们采用redis实现分布式锁的方案。</h5><ul>
+<li>在分布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行。</li>
+<li>主要是通过<strong>redis的sexnx特性</strong>完成分布式锁的功能：A获取到锁以后其他客户端不能操作，只能等待A释放锁以后，其他客户端才能操作。</li>
+</ul>
+<p>为了提升redis的执行效率，使用redis的管道技术。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/%E5%BB%B6%E8%BF%9F%E4%BB%BB%E5%8A%A1/" data-id="clvrtv7e60000gkuegt32ebsm" data-title="延迟任务" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-乐观锁在项目中的应用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T03:22:34.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">乐观锁在项目中的应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>乐观锁的原理：每次开始修改行数据时，都会乐观地认为不会有别的事务修改这行数据，因此不会给数据加锁。修改完成时，查看版本号时候与刚开始修改时一致。所以要给数据库表加一个version字段，作为版本号。</p>
+<p>乐观锁在项目中用于<strong>延迟队列</strong>，任务日志实体类中有一个version属性。</p>
+<ul>
+<li>使用Mybatis-Plus的@Version注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 版本号,用乐观锁</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Version</span></span><br><span class="line">   <span class="keyword">private</span> Integer version;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在ScheduleApplication启动类中加入Mybatis-Plus的乐观锁支持配置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * mybatis-plus乐观锁支持</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@Bean</span></span><br><span class="line">   <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">optimisticLockerInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">       <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">       interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">OptimisticLockerInnerInterceptor</span>());</span><br><span class="line">       <span class="keyword">return</span> interceptor;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/%E4%B9%90%E8%A7%82%E9%94%81%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" data-id="clvrjq4990001pguefe1h9m63" data-title="乐观锁在项目中的应用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Elasticsearch学习记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/03/Elasticsearch%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="article-date">
@@ -367,100 +615,11 @@
 
 
   
-    <article id="post-demoArticle" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/01/demoArticle/" class="article-date">
-  <time class="dt-published" datetime="2024-05-01T12:44:12.821Z" itemprop="datePublished">2024-05-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/01/demoArticle/">demo文章</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="这是我的示例文章"><a href="#这是我的示例文章" class="headerlink" title="这是我的示例文章"></a>这是我的示例文章</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/01/demoArticle/" data-id="clvnt94h9000010uefebvh9aj" data-title="demo文章" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/01/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-05-01T09:20:07.458Z" itemprop="datePublished">2024-05-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/01/hello-world/" data-id="clvnlybem00006kue6bra926h" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -474,7 +633,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag">nginx学习记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="tag">vue3踩坑记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" rel="tag">校园文明平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" rel="tag">校园文明平台项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag">框架学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" rel="tag">面试八股</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="tag">面试准备</a></li></ul>
     </div>
   </div>
 
@@ -484,7 +643,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 12.5px;">vue3踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 17.5px;">面试准备</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">nginx学习记录</a> <a href="/tags/vue3%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" style="font-size: 12.5px;">vue3踩坑记录</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0/" style="font-size: 10px;">校园文明平台</a> <a href="/tags/%E6%A0%A1%E5%9B%AD%E6%96%87%E6%98%8E%E5%B9%B3%E5%8F%B0%E9%A1%B9%E7%9B%AE/" style="font-size: 20px;">校园文明平台项目</a> <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">框架学习</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 10px;">问题解决</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" style="font-size: 10px;">面试八股</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" style="font-size: 17.5px;">面试准备</a>
     </div>
   </div>
 
@@ -493,7 +652,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li></ul>
     </div>
   </div>
 
@@ -506,23 +665,23 @@
       <ul>
         
           <li>
+            <a href="/2024/09/01/ComfyUI%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">ComfyUI学习记录</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/23/ChatTTS%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%B9%B6%E4%BD%BF%E7%94%A8Api%E6%B5%81%E7%A8%8B/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/07/mysql/">mysql</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/03/nginx/">nginx</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/30/vue3-element-plus%E4%B8%ADel-dialog%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">vue3+element-plus中el-dialog无法显示的问题</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/29/vue3%E4%B8%ADel-table%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%8D%E5%87%BA%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98/">vue3中el-table数据渲染不出来的问题</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/20/%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8/">网关的作用</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/18/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/14/5-14%E9%9D%A2%E8%AF%95%E5%86%85%E5%AE%B9%E5%87%86%E5%A4%87/">5-14面试内容准备</a>
           </li>
         
       </ul>
